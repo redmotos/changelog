@@ -1,0 +1,51 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { apps, getApp } from "../../data/apps";
+
+export async function getStaticPaths() {
+  return apps.map((app) => ({ params: { app: app.slug } }));
+}
+
+const { app: appSlug } = Astro.params;
+const app = getApp(appSlug!)!;
+const base = import.meta.env.BASE_URL;
+
+const entries = (await getCollection("changelog"))
+  .filter((e) => e.data.app === appSlug)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<BaseLayout title={`${app.name} — Changelog`} activeApp={app.slug}>
+  <a href={`${base}/`} style="color: var(--fg-muted); font-size: 0.875rem; text-decoration:none;">
+    &larr; Todas las apps
+  </a>
+  <h1 style="margin-top:0.5rem;">{app.name}</h1>
+  <p style="color: var(--fg-muted);">{app.description}</p>
+
+  <ol style="list-style:none; padding:0; margin-top:2rem; border-left: 2px solid var(--border);">
+    {
+      entries.map((entry) => (
+        <li style="padding: 0 0 2rem 1.5rem; position:relative;">
+          <span
+            style={`position:absolute; left:-6.5px; top:6px; width:11px; height:11px; border-radius:50%; background:${app.color};`}
+          />
+          <time style="color:var(--fg-muted); font-size:0.8rem;">
+            {entry.data.date.toLocaleDateString("es-AR", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })}
+          </time>
+          <h3 style="margin:0.2rem 0 0.5rem;">
+            <a href={`${base}/${app.slug}/${entry.slug.split("/").pop()}/`} style="text-decoration:none;">
+              v{entry.data.version}
+            </a>
+          </h3>
+        </li>
+      ))
+    }
+  </ol>
+
+  {entries.length === 0 && <p>Todavía no hay novedades publicadas para esta app.</p>}
+</BaseLayout>

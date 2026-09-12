@@ -1,0 +1,54 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { apps } from "../data/apps";
+
+const entries = await getCollection("changelog");
+const base = import.meta.env.BASE_URL;
+
+const latestByApp = apps.map((app) => {
+  const appEntries = entries
+    .filter((e) => e.data.app === app.slug)
+    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+  return { app, latest: appEntries[0], count: appEntries.length };
+});
+---
+
+<BaseLayout title="Changelog — Redmotos">
+  <h1>Novedades</h1>
+  <p style="color: var(--fg-muted)">
+    Últimas actualizaciones de cada app. Elegí una para ver su historial completo.
+  </p>
+
+  <div style="display: grid; gap: 1rem; margin-top: 2rem;">
+    {
+      latestByApp.map(({ app, latest, count }) => (
+        <a
+          href={`${base}/${app.slug}/`}
+          style={`display:block; padding:1.25rem 1.5rem; border:1px solid var(--border); border-radius:12px; text-decoration:none; border-left: 4px solid ${app.color};`}
+        >
+          <div style="display:flex; justify-content:space-between; align-items:baseline;">
+            <strong style="font-size:1.05rem;">{app.name}</strong>
+            <span style="color:var(--fg-muted); font-size:0.8rem;">
+              {count} {count === 1 ? "release" : "releases"}
+            </span>
+          </div>
+          <p style="color:var(--fg-muted); margin:0.25rem 0 0;">
+            {app.description}
+          </p>
+          {latest && (
+            <p style="margin:0.75rem 0 0; font-size:0.875rem;">
+              Última: <strong>v{latest.data.version}</strong>
+              {" · "}
+              {latest.data.date.toLocaleDateString("es-AR", {
+                year: "numeric",
+                month: "short",
+                day: "numeric",
+              })}
+            </p>
+          )}
+        </a>
+      ))
+    }
+  </div>
+</BaseLayout>

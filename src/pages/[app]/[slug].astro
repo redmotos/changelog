@@ -1,0 +1,50 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getApp } from "../../data/apps";
+
+export async function getStaticPaths() {
+  const entries = await getCollection("changelog");
+  return entries.map((entry) => {
+    const [app, slug] = entry.slug.split("/");
+    return { params: { app, slug }, props: { entry } };
+  });
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+const app = getApp(entry.data.app)!;
+const base = import.meta.env.BASE_URL;
+---
+
+<BaseLayout title={`v${entry.data.version} — ${app.name}`} activeApp={app.slug}>
+  <a
+    href={`${base}/${app.slug}/`}
+    style="color: var(--fg-muted); font-size: 0.875rem; text-decoration:none;"
+  >
+    &larr; {app.name}
+  </a>
+
+  <h1 style="margin-top:0.5rem;">v{entry.data.version}</h1>
+  <p style="color: var(--fg-muted);">
+    {
+      entry.data.date.toLocaleDateString("es-AR", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      })
+    }
+    {
+      entry.data.tag && (
+        <>
+          {" · "}
+          <code>{entry.data.tag}</code>
+        </>
+      )
+    }
+  </p>
+
+  <article>
+    <Content />
+  </article>
+</BaseLayout>
