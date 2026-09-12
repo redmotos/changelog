@@ -1,54 +1,139 @@
 ---
 import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { apps } from "../data/apps";
+import { getApp } from "../data/apps";
 
-const entries = await getCollection("changelog");
 const base = import.meta.env.BASE_URL;
 
-const latestByApp = apps.map((app) => {
-  const appEntries = entries
-    .filter((e) => e.data.app === app.slug)
-    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-  return { app, latest: appEntries[0], count: appEntries.length };
-});
+const entries = (await getCollection("changelog"))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .map((entry) => ({ entry, apps: entry.data.apps.map((slug) => getApp(slug)!) }));
 ---
 
 <BaseLayout title="Changelog — Redmotos">
   <h1>Novedades</h1>
-  <p style="color: var(--fg-muted)">
-    Últimas actualizaciones de cada app. Elegí una para ver su historial completo.
-  </p>
+  <p class="lead">Todo lo que cambió en nuestras apps, en orden cronológico.</p>
 
-  <div style="display: grid; gap: 1rem; margin-top: 2rem;">
+  <div class="feed">
     {
-      latestByApp.map(({ app, latest, count }) => (
-        <a
-          href={`${base}/${app.slug}/`}
-          style={`display:block; padding:1.25rem 1.5rem; border:1px solid var(--border); border-radius:12px; text-decoration:none; border-left: 4px solid ${app.color};`}
-        >
-          <div style="display:flex; justify-content:space-between; align-items:baseline;">
-            <strong style="font-size:1.05rem;">{app.name}</strong>
-            <span style="color:var(--fg-muted); font-size:0.8rem;">
-              {count} {count === 1 ? "release" : "releases"}
+      entries.map(({ entry, apps }) => (
+        <a class="entry" href={`${base}/${entry.id}/`}>
+          <div class="entry-date">
+            {entry.data.date.toLocaleDateString("es-AR", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })}
+          </div>
+          <div class="entry-meta">
+            {apps.map((app) => (
+              <span class="badge" style={`background:${app.color};`}>
+                {app.name}
+              </span>
+            ))}
+            <span class="entry-version">
+              v{entry.data.version}
+              {entry.data.tag && <span class="entry-tag">{entry.data.tag}</span>}
             </span>
           </div>
-          <p style="color:var(--fg-muted); margin:0.25rem 0 0;">
-            {app.description}
-          </p>
-          {latest && (
-            <p style="margin:0.75rem 0 0; font-size:0.875rem;">
-              Última: <strong>v{latest.data.version}</strong>
-              {" · "}
-              {latest.data.date.toLocaleDateString("es-AR", {
-                year: "numeric",
-                month: "short",
-                day: "numeric",
-              })}
-            </p>
+          <h2 class="entry-title">{entry.data.title}</h2>
+          {entry.data.image && (
+            <Image
+              class="entry-image"
+              src={entry.data.image}
+              alt={entry.data.title}
+              width={960}
+            />
           )}
+          <p class="entry-desc">{entry.data.description}</p>
         </a>
       ))
     }
   </div>
+
+  {entries.length === 0 && <p>Todavía no hay actualizaciones publicadas.</p>}
+
+  <style>
+    .lead {
+      color: var(--fg-muted);
+      margin: 0.5rem 0 0;
+    }
+
+    .feed {
+      margin-top: 2.5rem;
+    }
+
+    .entry {
+      display: block;
+      padding: 2.5rem 0;
+      border-bottom: 1px solid var(--border);
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .feed .entry:first-child {
+      padding-top: 0;
+    }
+
+    .feed .entry:last-child {
+      border-bottom: none;
+    }
+
+    .entry-date {
+      color: var(--fg-muted);
+      font-size: 0.875rem;
+    }
+
+    .entry-meta {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin: 0.6rem 0 0.5rem;
+    }
+
+    .badge {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: #fff;
+      padding: 0.2rem 0.55rem;
+      border-radius: 4px;
+      line-height: 1.4;
+    }
+
+    .entry-version {
+      font-size: 0.8rem;
+      color: var(--fg-faint);
+    }
+
+    .entry-tag {
+      margin-left: 0.4rem;
+    }
+
+    .entry-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin: 0 0 1rem;
+      letter-spacing: -0.01em;
+    }
+
+    .entry-image {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      margin-bottom: 1rem;
+    }
+
+    .entry-desc {
+      color: var(--fg-muted);
+      margin: 0;
+    }
+
+    .entry:hover .entry-title {
+      text-decoration: underline;
+    }
+  </style>
 </BaseLayout>

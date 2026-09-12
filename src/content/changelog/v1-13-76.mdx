@@ -1,0 +1,50 @@
+---
+apps: [backoffice, shoppingcart]
+version: "1.13.76"
+date: 2026-09-12T00:16:39Z
+title: Visibilidad total sobre las imágenes de producto
+description: Nueva vista de métricas en Backoffice para saber cuántos productos tienen imagen, más mejoras en pedidos y tablas.
+image: ./v1-13-76-cover.png
+---
+
+import ChangeItem from "../../components/ChangeItem.astro";
+import ReleaseGallery from "../../components/ReleaseGallery.astro";
+import statsImg from "./v1-13-76-cover.png";
+import recountImg from "./v1-13-76-02.png";
+
+## Nuevo
+
+<ul class="changes">
+  <ChangeItem title="Métricas de imágenes de producto">
+    Ver de un vistazo, desde una nueva vista en Backoffice, cuántos productos tienen imagen y cuántos no.
+
+    <ReleaseGallery images={[statsImg]} alt="Vista de métricas de imágenes de producto en Backoffice" />
+
+  </ChangeItem>
+  <ChangeItem title="Imagen de producto en catálogo online y carrito">
+    Mostrar la imagen del producto también en el catálogo online y en el carrito.
+  </ChangeItem>
+  <ChangeItem title="Descuento automático de stock">
+    Descontar automáticamente del stock las unidades confirmadas al armar un pedido.
+  </ChangeItem>
+  <ChangeItem title="Memoria de columnas en tablas">
+    Recordar en las tablas qué columnas se mostraron y en qué orden, aunque se cierre sesión y se vuelva más tarde.
+  </ChangeItem>
+</ul>
+
+## Correcciones
+
+<ul class="changes">
+  <ChangeItem title="Cliente precargado al editar un usuario">
+    Precargar el cliente asignado al editar un usuario.
+  </ChangeItem>
+  <ChangeItem title="Cursor correcto en tablas sin acción">
+    Quitar el cursor de "clickeable" en tablas sin una acción por fila.
+  </ChangeItem>
+  <ChangeItem title="Agregar productos durante el reconteo">
+    Permitir agregar productos durante el reconteo de un pedido.
+
+    <ReleaseGallery images={[recountImg]} alt="Agregar productos durante el reconteo de un pedido" />
+
+  </ChangeItem>
+</ul>

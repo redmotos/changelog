@@ -1,12 +1,9 @@
 ---
-import { apps } from "../data/apps";
-
 interface Props {
   title: string;
-  activeApp?: string;
 }
 
-const { title, activeApp } = Astro.props;
+const { title } = Astro.props;
 const base = import.meta.env.BASE_URL;
 ---
 
@@ -19,20 +16,21 @@ const base = import.meta.env.BASE_URL;
     <style>
       :root {
         --bg: #ffffff;
-        --bg-subtle: #f8fafc;
-        --fg: #0f172a;
-        --fg-muted: #64748b;
-        --border: #e2e8f0;
-        --accent: #2563eb;
+        --bg-nav: #fbfbfa;
+        --fg: #191919;
+        --fg-muted: #787774;
+        --fg-faint: #9b9a97;
+        --border: #ebebea;
       }
 
       @media (prefers-color-scheme: dark) {
         :root {
-          --bg: #0b1120;
-          --bg-subtle: #111827;
-          --fg: #e2e8f0;
-          --fg-muted: #94a3b8;
-          --border: #1f2937;
+          --bg: #191919;
+          --bg-nav: #202020;
+          --fg: #e9e9e7;
+          --fg-muted: #9b9a97;
+          --fg-faint: #6f6e69;
+          --border: #2f2f2f;
         }
       }
 
@@ -50,13 +48,27 @@ const base = import.meta.env.BASE_URL;
         background: var(--bg);
         color: var(--fg);
         font-family:
-          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
-          Arial, sans-serif;
-        line-height: 1.6;
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial,
+          sans-serif;
+        line-height: 1.65;
+        -webkit-font-smoothing: antialiased;
       }
 
       a {
         color: inherit;
+      }
+
+      a:focus-visible,
+      button:focus-visible {
+        outline: 2px solid var(--fg);
+        outline-offset: 2px;
+      }
+
+      h1 {
+        font-size: 1.75rem;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+        margin: 0;
       }
 
       nav.topnav {
@@ -65,49 +77,28 @@ const base = import.meta.env.BASE_URL;
         z-index: 10;
         display: flex;
         align-items: center;
-        gap: 1.5rem;
-        padding: 0.9rem 1.5rem;
-        background: color-mix(in srgb, var(--bg) 85%, transparent);
+        padding: 0.95rem 1.5rem;
+        background: color-mix(in srgb, var(--bg-nav) 92%, transparent);
         backdrop-filter: blur(8px);
         border-bottom: 1px solid var(--border);
       }
 
       nav.topnav .brand {
-        font-weight: 700;
+        font-weight: 600;
         text-decoration: none;
-        font-size: 1rem;
-      }
-
-      nav.topnav .tabs {
-        display: flex;
-        gap: 0.25rem;
-        overflow-x: auto;
-      }
-
-      nav.topnav .tabs a {
-        text-decoration: none;
-        padding: 0.4rem 0.75rem;
-        border-radius: 999px;
-        font-size: 0.875rem;
-        color: var(--fg-muted);
+        font-size: 0.95rem;
         white-space: nowrap;
       }
 
-      nav.topnav .tabs a.active,
-      nav.topnav .tabs a:hover {
-        background: var(--bg-subtle);
-        color: var(--fg);
-      }
-
       main {
-        max-width: 760px;
+        max-width: 680px;
         margin: 0 auto;
-        padding: 2rem 1.5rem 5rem;
+        padding: 3rem 1.5rem 6rem;
       }
 
       footer {
         text-align: center;
-        color: var(--fg-muted);
+        color: var(--fg-faint);
         font-size: 0.8rem;
         padding: 2rem 1.5rem;
       }
@@ -116,22 +107,10 @@ const base = import.meta.env.BASE_URL;
   <body>
     <nav class="topnav">
       <a class="brand" href={`${base}/`}>Changelog</a>
-      <div class="tabs">
-        {
-          apps.map((app) => (
-            <a
-              href={`${base}/${app.slug}/`}
-              class={activeApp === app.slug ? "active" : ""}
-            >
-              {app.name}
-            </a>
-          ))
-        }
-      </div>
     </nav>
     <main>
       <slot />
     </main>
-    <footer>Redmotos — novedades de nuestras apps</footer>
+    <footer>Redmotos © {new Date().getFullYear()}</footer>
   </body>
 </html>

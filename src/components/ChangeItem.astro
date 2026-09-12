@@ -1,0 +1,51 @@
+---
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<li class="change-item">
+  <span class="change-dot" aria-hidden="true"></span>
+  <h3 class="change-title">{title}</h3>
+  <div class="change-body">
+    <slot />
+  </div>
+</li>
+
+<style>
+  .change-item {
+    position: relative;
+    padding: 0 0 1.75rem 1.25rem;
+  }
+
+  .change-item:last-child {
+    padding-bottom: 0;
+  }
+
+  .change-dot {
+    position: absolute;
+    left: -3.5px;
+    top: 0.45rem;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--fg-faint);
+  }
+
+  .change-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin: 0 0 0.4rem;
+  }
+
+  .change-body :global(p) {
+    color: var(--fg-muted);
+    margin: 0 0 0.75rem;
+  }
+
+  .change-body :global(p:last-child) {
+    margin-bottom: 0;
+  }
+</style>

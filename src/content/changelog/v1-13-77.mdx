@@ -1,0 +1,38 @@
+---
+apps: [backoffice]
+version: "1.13.77"
+date: 2026-09-12T00:43:19Z
+title: Descuentos visibles en surtido, reconteo y pedidos
+description: Los productos con descuento ahora muestran un badge en surtido y reconteo, y el listado de pedidos refleja el total con descuento aplicado.
+image: ./v1-13-77-02.png
+---
+
+import ChangeItem from "../../components/ChangeItem.astro";
+import ReleaseGallery from "../../components/ReleaseGallery.astro";
+import supplyImg from "./v1-13-77-02.png";
+import ordersImg from "./v1-13-77-01.png";
+
+## Nuevo
+
+<ul class="changes">
+  <ChangeItem title="Badge de descuento en surtido y reconteo">
+    Mostrar una etiqueta con el porcentaje de descuento junto al producto en los listados de surtido y reconteo.
+
+    <ReleaseGallery images={[supplyImg]} alt="Etiqueta de descuento en el listado de surtido" />
+
+  </ChangeItem>
+  <ChangeItem title="Total con descuento en el listado de pedidos">
+    Mostrar, en el listado de pedidos, el total original tachado junto al nuevo total cuando hay descuento.
+
+    <ReleaseGallery images={[ordersImg]} alt="Total con descuento en el listado de pedidos" />
+
+  </ChangeItem>
+</ul>
+
+## Otros
+
+<ul class="changes">
+  <ChangeItem title="Enlace de invitación junto a asignar catálogos">
+    Reubicar el botón para generar el enlace de invitación junto al de asignar catálogos, para tener ambas acciones en un mismo lugar.
+  </ChangeItem>
+</ul>

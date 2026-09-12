@@ -1,0 +1,40 @@
+---
+apps: [backoffice]
+version: "1.13.78"
+date: 2026-09-12T17:06:10Z
+title: Cargar imágenes de productos y gestionar catálogos asignados a clientes por lotes
+description: Ahora se pueden completar imágenes de producto faltantes desde Backoffice (una por una o en lote) y aplicar acciones sobre varios catálogos asignados a la vez.
+image: ./v1-13-78-02.png
+---
+
+import ChangeItem from "../../components/ChangeItem.astro";
+import ReleaseGallery from "../../components/ReleaseGallery.astro";
+import uploadStep1 from "./v1-13-78-02.png";
+import uploadStep2 from "./v1-13-78-03.png";
+import uploadStep3 from "./v1-13-78-04.png";
+import uploadStep4 from "./v1-13-78-05.png";
+import uploadStep5 from "./v1-13-78-06.png";
+import bulkCatalogueImg from "./v1-13-78-01.png";
+
+## Nuevo
+
+<ul class="changes">
+  <ChangeItem title="Carga de imágenes de producto sin foto">
+    Completar la imagen de un producto sin foto directamente desde Backoffice, una por una o en lote, con confirmación previa.
+
+    <ReleaseGallery
+      images={[uploadStep1, uploadStep2, uploadStep3, uploadStep4, uploadStep5]}
+      alt="Carga de imágenes de productos sin foto en Backoffice"
+    />
+
+  </ChangeItem>
+  <ChangeItem title="Acciones en lote sobre catálogos asignados">
+    Seleccionar varios catálogos asignados a un cliente para extender su vigencia o quitarlos en lote, con una barra de progreso.
+
+    <ReleaseGallery
+      images={[bulkCatalogueImg]}
+      alt="Acciones en lote sobre catálogos asignados a un cliente"
+    />
+
+  </ChangeItem>
+</ul>

@@ -1,0 +1,137 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getApp } from "../data/apps";
+
+export async function getStaticPaths() {
+  const entries = await getCollection("changelog");
+  return entries.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const apps = entry.data.apps.map((slug) => getApp(slug)!);
+const base = import.meta.env.BASE_URL;
+---
+
+<BaseLayout title={entry.data.title}>
+  <a class="back" href={`${base}/`}>&larr; Todas las novedades</a>
+
+  <div class="entry-date">
+    {
+      entry.data.date.toLocaleDateString("es-AR", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      })
+    }
+  </div>
+  <div class="entry-meta">
+    {
+      apps.map((app) => (
+        <span class="badge" style={`background:${app.color};`}>
+          {app.name}
+        </span>
+      ))
+    }
+    <span class="entry-version">
+      v{entry.data.version}
+      {entry.data.tag && <span class="entry-tag">{entry.data.tag}</span>}
+    </span>
+  </div>
+  <h1 class="entry-title">{entry.data.title}</h1>
+
+  <p class="entry-desc">{entry.data.description}</p>
+
+  <div class="entry-content">
+    <Content />
+  </div>
+
+  <style>
+    .back {
+      color: var(--fg-muted);
+      font-size: 0.875rem;
+      text-decoration: none;
+    }
+
+    .entry-date {
+      color: var(--fg-muted);
+      font-size: 0.875rem;
+      margin-top: 1.5rem;
+    }
+
+    .entry-meta {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin: 0.6rem 0 0.75rem;
+    }
+
+    .badge {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: #fff;
+      padding: 0.2rem 0.55rem;
+      border-radius: 4px;
+      line-height: 1.4;
+    }
+
+    .entry-version {
+      font-size: 0.8rem;
+      color: var(--fg-faint);
+      margin-left: 0.3rem;
+    }
+
+    .entry-tag {
+      margin-left: 0.4rem;
+    }
+
+    .entry-title {
+      margin: 0 0 1.5rem;
+    }
+
+    .entry-desc {
+      color: var(--fg-muted);
+      font-size: 1.05rem;
+      margin: 0 0 2rem;
+    }
+
+    .entry-content :global(h2) {
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      margin: 2rem 0 0.85rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .entry-content :global(h2:first-child) {
+      margin-top: 0;
+    }
+
+    .entry-content :global(ul) {
+      margin: 0;
+      padding-left: 1.25rem;
+    }
+
+    .entry-content :global(li) {
+      margin: 0.4rem 0;
+    }
+
+    .entry-content :global(p) {
+      margin: 0.6rem 0;
+    }
+
+    .entry-content :global(ul.changes) {
+      list-style: none;
+      margin: 0;
+      padding-left: 0;
+      border-left: 2px solid var(--border);
+    }
+
+    .entry-content :global(ul.changes li) {
+      margin: 0;
+    }
+  </style>
+</BaseLayout>
