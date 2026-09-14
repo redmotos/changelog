@@ -1,0 +1,31 @@
+---
+apps: [backoffice, shoppingcart]
+version: "1.13.79"
+date: 2026-09-14T16:34:30Z
+title: Mejorar la carga de imágenes de productos y agregar selector de departamento en el checkout
+description: Se mejoró la experiencia de carga de imágenes de productos en Backoffice, se sumaron transiciones más suaves al cargar datos de clientes y navegar, y el checkout ahora pide el departamento desde una lista en vez de texto libre.
+---
+
+import ChangeItem from "../../components/ChangeItem.astro";
+
+## Nuevo
+
+<ul class="changes">
+  <ChangeItem title="Botón principal y modal más ancho para carga de imágenes">
+    El botón para cargar imágenes en lote pasó a ser la acción principal de la vista, y el modal de carga individual ahora es más ancho.
+  </ChangeItem>
+  <ChangeItem title="Selector de departamento en el checkout">
+    El campo de departamento en la dirección de envío ahora se completa desde una lista con los 18 departamentos de Honduras, en vez de texto libre.
+  </ChangeItem>
+  <ChangeItem title="Transiciones más suaves al cargar pedidos">
+    Cargar los datos de un cliente y navegar entre pantallas del backoffice ahora se siente más fluido, con una animación de carga y una transición de aparición sutil.
+  </ChangeItem>
+</ul>
+
+## Correcciones
+
+<ul class="changes">
+  <ChangeItem title="Corregir carga masiva de imágenes con archivos rechazados">
+    Cuando un archivo era rechazado en una carga masiva de imágenes, ya no queda marcado por error como subido: permanece en la lista para poder corregirlo sin perder el resto del lote.
+  </ChangeItem>
+</ul>
