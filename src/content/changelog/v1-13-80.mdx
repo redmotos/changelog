@@ -1,0 +1,31 @@
+---
+apps: [shoppingcart, catalogos]
+version: "1.13.80"
+date: 2026-09-14T23:37:47Z
+title: Sincronizar imágenes de productos desde el bucket y asegurar los enlaces de invitación
+description: Las imágenes de productos ahora se sincronizan automáticamente desde el bucket de almacenamiento, y los enlaces de invitación a clientes requieren una confirmación explícita antes de canjearse.
+---
+
+import ChangeItem from "../../components/ChangeItem.astro";
+import ReleaseGallery from "../../components/ReleaseGallery.astro";
+import inviteScreen from "./v1-13-80-01.png";
+import inviteExpiredScreen from "./v1-13-80-02.png";
+
+## Nuevo
+
+<ul class="changes">
+  <ChangeItem title="Sincronización automática de imágenes de productos">
+    Las imágenes de productos que se suben al almacenamiento en la nube ahora se enlazan automáticamente al producto correspondiente, sin necesidad de cargarlas manualmente desde Backoffice.
+  </ChangeItem>
+</ul>
+
+## Correcciones
+
+<ul class="changes">
+  <ChangeItem title="Confirmación explícita para canjear enlaces de invitación">
+    Los enlaces de invitación para clientes ya no se canjean automáticamente al abrirlos: ahora muestran una pantalla de bienvenida y piden confirmar antes de iniciar sesión, para que previsualizaciones automáticas de aplicaciones de mensajería no invaliden el enlace antes de que el cliente lo use. Si el enlace ya fue usado o venció, se muestra un mensaje claro con la opción de pedir uno nuevo.
+
+    <ReleaseGallery images={[inviteScreen, inviteExpiredScreen]} alt="Pantallas de invitación de cliente: bienvenida y enlace vencido" />
+
+  </ChangeItem>
+</ul>
