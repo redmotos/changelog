@@ -1,0 +1,25 @@
+---
+apps: [backoffice]
+version: "1.13.81"
+date: 2026-09-15T04:16:05Z
+title: Buscar y priorizar productos sin imagen en Backoffice
+description: El listado de productos sin imagen ahora permite buscar por código o descripción, y muestra primero los productos que se vendieron en el último mes.
+---
+
+import ChangeItem from "../../components/ChangeItem.astro";
+
+## Nuevo
+
+<ul class="changes">
+  <ChangeItem title="Buscador en el listado de productos sin imagen">
+    Se agregó un buscador por código o descripción a la sección "Productos sin imagen", para encontrar un producto puntual sin recorrer todas las páginas.
+  </ChangeItem>
+</ul>
+
+## Correcciones
+
+<ul class="changes">
+  <ChangeItem title="Priorizar productos vendidos recientemente en el listado sin imagen">
+    Los productos sin imagen que se vendieron en el último mes ahora aparecen primero en el listado, para enfocar la carga de imágenes en lo que tiene más impacto.
+  </ChangeItem>
+</ul>
