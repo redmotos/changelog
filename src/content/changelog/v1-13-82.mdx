@@ -9,24 +9,40 @@ description: El detalle de cliente en Backoffice ahora organiza cuentas por cobr
 import ChangeItem from "../../components/ChangeItem.astro";
 import ReleaseGallery from "../../components/ReleaseGallery.astro";
 import globalCatalogue from "./v1-13-82-01.png";
+import receivables from "./v1-13-82-02.png";
+import paymentBreakdown from "./v1-13-82-03.png";
+import paymentsTab from "./v1-13-82-04.png";
+import missingCartUserDialog from "./v1-13-82-05.png";
 
 ## Nuevo
 
 <ul class="changes">
   <ChangeItem title="Cuentas por cobrar en el detalle de cliente">
     El detalle de cliente en Backoffice ahora se organiza en pestañas. La nueva pestaña "Cuentas por cobrar", abierta por defecto, muestra el saldo pendiente, el límite y el crédito disponible, junto con la lista de facturas pendientes con sus días de mora. Los catálogos asignados pasan a su propia pestaña, sin cambios en su funcionamiento.
+
+    <ReleaseGallery images={[receivables]} alt="Pestaña de cuentas por cobrar en el detalle de cliente" />
+
   </ChangeItem>
   <ChangeItem title="Desglose de pagos aplicados a cada factura">
     Al hacer click en una factura de la pestaña "Cuentas por cobrar", se despliega el detalle de los pagos aplicados a esa factura, con fecha, monto aplicado y referencia.
+
+    <ReleaseGallery images={[paymentBreakdown]} alt="Desglose de pagos aplicados a una factura" />
+
   </ChangeItem>
   <ChangeItem title="Pestaña de pagos en el detalle de cliente">
     Se agregó la pestaña "Pagos" al detalle de cliente, con los pagos recientes del cliente (fecha, número, importe, referencia y contacto), que antes solo se podían consultar en la aplicación anterior.
+
+    <ReleaseGallery images={[paymentsTab]} alt="Pestaña de pagos en el detalle de cliente" />
+
   </ChangeItem>
   <ChangeItem title="Sucursal, vendedor y usuario en la ficha del cliente">
     El encabezado del detalle de cliente ahora muestra la sucursal, el vendedor asignado y el usuario de carrito cuando existen.
   </ChangeItem>
   <ChangeItem title="Crear el usuario de carrito desde el detalle de cliente">
     Al abrir un cliente que no tiene usuario de carrito, los administradores ven un aviso que ofrece crearlo en ese momento. El registro se completa sin salir de la ficha, agregando el correo del cliente si todavía no lo tiene.
+
+    <ReleaseGallery images={[missingCartUserDialog]} alt="Aviso para crear el usuario de carrito desde el detalle de cliente" />
+
   </ChangeItem>
   <ChangeItem title="Asignar catálogos como globales">
     En "Asignar catálogos" se agregó la opción "Asignar como catálogo global", para que un catálogo lo vean todos los clientes sin asignarlo uno por uno. Antes de aplicarla se pide una confirmación que indica el catálogo y avisa que será visible para todos los clientes.
