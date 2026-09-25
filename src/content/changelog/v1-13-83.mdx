@@ -1,0 +1,30 @@
+---
+apps: [backoffice, shoppingcart]
+version: "1.13.83"
+date: 2026-09-25T17:55:25Z
+title: Restringir proveedores por usuario en la búsqueda global y mejorar la búsqueda al agregar productos
+description: Se puede limitar qué proveedores ve cada usuario en la búsqueda global de Shopping Cart y la búsqueda de productos al armar un pedido en Backoffice ahora encuentra resultados aunque los términos no sigan el orden del nombre.
+---
+
+import ChangeItem from "../../components/ChangeItem.astro";
+import ReleaseGallery from "../../components/ReleaseGallery.astro";
+import includedProviders from "./v1-13-83-01.png";
+
+## Nuevo
+
+<ul class="changes">
+  <ChangeItem title="Proveedores incluidos por usuario en la búsqueda global">
+    Cada usuario de Shopping Cart puede tener ahora una lista de proveedores incluidos. Si un usuario tiene proveedores asignados, su búsqueda global solo devuelve productos de esos proveedores; si no tiene ninguno asignado, sigue viendo todos los resultados como hasta ahora.
+
+    <ReleaseGallery images={[includedProviders]} alt="Selector de proveedores incluidos en el formulario de usuario de Backoffice" />
+
+  </ChangeItem>
+</ul>
+
+## Correcciones
+
+<ul class="changes">
+  <ChangeItem title="Búsqueda de productos al agregar al pedido">
+    Al buscar productos para agregar a un pedido en Backoffice, ahora aparecen los resultados aunque los términos de búsqueda no estén en el mismo orden en que figuran en el nombre del producto (por ejemplo, buscar "aceite filtro" ya encuentra "FILTRO DE ACEITE").
+  </ChangeItem>
+</ul>
