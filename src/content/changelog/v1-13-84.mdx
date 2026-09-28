@@ -1,0 +1,33 @@
+---
+apps: [shoppingcart, backoffice]
+version: "1.13.84"
+date: 2026-09-28T19:04:01Z
+title: Mostrar stock de otras sucursales en pedidos y corregir la búsqueda del catálogo
+description: La gestión de pedidos en Backoffice ahora permite consultar el stock de otras sucursales al pasar el mouse sobre el inventario, y se corrigieron fallas en la búsqueda y paginación del catálogo de productos.
+---
+
+import ChangeItem from "../../components/ChangeItem.astro";
+import ReleaseGallery from "../../components/ReleaseGallery.astro";
+import stockOtrasSucursales from "./v1-13-84-01.png";
+
+## Nuevo
+
+<ul class="changes">
+  <ChangeItem title="Stock de otras sucursales en gestión de pedidos">
+    Al pasar el mouse sobre el inventario de un producto en las vistas de Confirmar, Surtir y Recontar pedidos, se muestra un panel con el stock disponible en las demás sucursales. Si el producto no tiene stock en ninguna otra sucursal, se indica con el mensaje "Sin stock en otras sucursales".
+
+    <ReleaseGallery images={[stockOtrasSucursales]} alt="Panel de stock de otras sucursales en gestión de pedidos" />
+
+  </ChangeItem>
+</ul>
+
+## Correcciones
+
+<ul class="changes">
+  <ChangeItem title="Registro de búsquedas del catálogo">
+    Se restableció el registro de las búsquedas realizadas en el catálogo, que se había dejado de guardar al migrar la vista de productos. Esto permite que las recomendaciones basadas en búsquedas recientes vuelvan a reflejar la actividad real de cada usuario.
+  </ChangeItem>
+  <ChangeItem title="Límite de resultados por página en el catálogo">
+    Se corrigió un error que permitía pedir una cantidad ilimitada de productos por página en el catálogo público, y se evitó un error del servidor al solicitar páginas muy altas del catálogo.
+  </ChangeItem>
+</ul>
