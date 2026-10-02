@@ -1,0 +1,34 @@
+---
+apps: [backoffice, catalogos]
+version: "1.13.85"
+date: 2026-10-02T19:55:21Z
+title: Explorar productos con imágenes y usuario de carrito desde el detalle de cliente
+description: El backoffice permite explorar todos los productos para subir, reemplazar o eliminar su imagen, y crear un usuario de carrito para un cliente directamente desde su detalle usando los datos de Odoo.
+---
+
+import ChangeItem from "../../components/ChangeItem.astro";
+import ReleaseGallery from "../../components/ReleaseGallery.astro";
+import crearUsuarioCarrito from "./v1-13-85-01.png";
+import formularioUsuarioCarrito from "./v1-13-85-02.png";
+
+## Nuevo
+
+<ul class="changes">
+  <ChangeItem title="Explorar productos y gestionar sus imágenes">
+    La sección "Productos sin imagen" de Catálogos pasa a llamarse "Explorar productos" y ahora lista todos los productos, marcando con un ícono los que ya tienen imagen. Cada producto permite subir, reemplazar o eliminar su imagen según corresponda, con confirmación antes de eliminar.
+  </ChangeItem>
+  <ChangeItem title="Crear usuario de carrito desde el detalle de cliente">
+    El detalle de un cliente sin usuario de carrito muestra un banner con la opción de crear uno. El formulario toma el nombre y el teléfono del cliente desde Odoo, sugiere un usuario y una contraseña, y solo pide el teléfono si no está registrado.
+
+    <ReleaseGallery images={[crearUsuarioCarrito, formularioUsuarioCarrito]} alt="Banner y formulario para crear un usuario de carrito desde el detalle de cliente" />
+
+  </ChangeItem>
+</ul>
+
+## Correcciones
+
+<ul class="changes">
+  <ChangeItem title="Stock correcto en pedidos confirmados">
+    Se corrigió el stock mostrado en los pedidos confirmados y en verificación, que restaba de más y podía mostrarse en cero aunque el producto tuviera existencias suficientes en Odoo.
+  </ChangeItem>
+</ul>
