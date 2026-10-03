@@ -1,0 +1,30 @@
+---
+apps: [shoppingcart, backoffice]
+version: "1.13.86"
+date: 2026-10-03T17:10:37Z
+title: Catálogos asignados en la home y vendedores restringidos a sus clientes de Odoo
+description: La home del carrito de compras muestra ahora los catálogos asignados a cada cliente mayorista, y cada vendedor queda vinculado a su empleado de Odoo para acceder solo a los clientes que le corresponden.
+---
+
+import ChangeItem from "../../components/ChangeItem.astro";
+import ReleaseGallery from "../../components/ReleaseGallery.astro";
+import misCatalogos1 from "./v1-13-86-01.png";
+import misCatalogos2 from "./v1-13-86-02.png";
+import empleadoVendedor from "./v1-13-86-03.png";
+
+## Nuevo
+
+<ul class="changes">
+  <ChangeItem title="Mis catálogos en la home">
+    La home del carrito de compras incluye una sección "Mis catálogos" con los catálogos asignados al cliente, separada de los catálogos globales. Cada catálogo se muestra con una grilla de productos y un botón para ver más catálogos asignados.
+
+    <ReleaseGallery images={[misCatalogos1, misCatalogos2]} alt="Sección Mis catálogos en la home del carrito de compras" />
+
+  </ChangeItem>
+  <ChangeItem title="Vendedores restringidos a sus clientes de Odoo">
+    Cada vendedor queda vinculado a su empleado de Odoo desde el backoffice y solo puede buscar y consultar los clientes asignados a ese empleado. Un vendedor sin empleado asignado no puede buscar clientes.
+
+    <ReleaseGallery images={[empleadoVendedor]} alt="Campo para asignar el empleado de Odoo a un vendedor en el backoffice" />
+
+  </ChangeItem>
+</ul>
