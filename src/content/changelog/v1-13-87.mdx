@@ -1,0 +1,20 @@
+---
+apps: [shoppingcart, backoffice]
+version: "1.13.87"
+date: 2026-10-05T15:57:55Z
+title: Corregir búsqueda de clientes para vendedores y mensaje de acceso restringido
+description: Se restablece la búsqueda de clientes para cualquier vendedor en el carrito de compras y se distingue, en el backoffice, entre un cliente inexistente y uno sin permiso de acceso.
+---
+
+import ChangeItem from "../../components/ChangeItem.astro";
+
+## Correcciones
+
+<ul class="changes">
+  <ChangeItem title="Búsqueda de clientes restablecida para vendedores">
+    La búsqueda paginada de clientes vuelve a funcionar para cualquier vendedor al crear un pedido en el carrito de compras, sin filtrar por el empleado de Odoo asignado.
+  </ChangeItem>
+  <ChangeItem title="Mensaje correcto al acceder a un cliente sin permiso">
+    En el backoffice, el detalle de un cliente que existe pero no pertenece al vendedor muestra "No tienes permiso para ver este cliente" en vez de "Cliente no encontrado".
+  </ChangeItem>
+</ul>
