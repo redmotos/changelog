@@ -1,0 +1,39 @@
+---
+apps: [backoffice, shoppingcart]
+version: "1.13.88"
+date: 2026-10-06T22:16:50Z
+title: Crear pedidos tipo Cotización desde el backoffice y buscar productos por teclado al confirmar
+description: El backoffice permite crear pedidos en estado Borrador (Cotización) y completarlos con una búsqueda de productos manejada por teclado, con validación de crédito sobre el total real del pedido.
+---
+
+import ChangeItem from "../../components/ChangeItem.astro";
+import ReleaseGallery from "../../components/ReleaseGallery.astro";
+import buscarProductos from "./v1-13-88-01.png";
+import listaCotizaciones from "./v1-13-88-02.png";
+import modalBuscarCliente from "./v1-13-88-03.png";
+import modalListoCrear from "./v1-13-88-04.png";
+import confirmarCotizacion from "./v1-13-88-05.png";
+import creditoRechazado from "./v1-13-88-06.png";
+
+## Nuevo
+
+<ul class="changes">
+  <ChangeItem title="Crear pedidos tipo Cotización desde el backoffice">
+    En la pestaña Creados del listado de pedidos se agrega el botón "Crear pedido +": abre un modal para elegir el cliente y escribir un comentario opcional, y crea un pedido en estado Borrador (con el badge "Cotización") para completarlo después.
+
+    <ReleaseGallery images={[listaCotizaciones, modalBuscarCliente, modalListoCrear]} alt="Listado de pedidos con el botón Crear pedido y el modal para elegir cliente" />
+
+  </ChangeItem>
+  <ChangeItem title="Confirmar una Cotización con validación de crédito sobre el total real">
+    Al confirmar una Cotización, el crédito disponible del cliente se valida contra el total real del pedido (con descuentos y cantidades incluidos). Si se excede el crédito, aparece un aviso con el motivo y la cantidad vuelve a su valor anterior.
+
+    <ReleaseGallery images={[confirmarCotizacion, creditoRechazado]} alt="Confirmación de una Cotización y aviso de crédito excedido" />
+
+  </ChangeItem>
+  <ChangeItem title="Búsqueda de productos por teclado al confirmar un pedido">
+    Al confirmar un pedido, se puede buscar y agregar productos sin usar el mouse: Enter busca, las flechas recorren los resultados y cambian de página, y la cantidad se guarda con Enter. Los productos ya agregados se destacan en la misma lista.
+
+    <ReleaseGallery images={[buscarProductos]} alt="Búsqueda de productos por teclado al confirmar un pedido" />
+
+  </ChangeItem>
+</ul>
