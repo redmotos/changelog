@@ -1,0 +1,42 @@
+---
+apps: [backoffice, shoppingcart]
+version: "1.13.89"
+date: 2026-10-11T04:43:56Z
+title: Editar Cotizaciones sin bloqueo por límite de crédito y validarlo solo al confirmar
+description: Una Cotización en Borrador se puede seguir editando aunque supere el crédito disponible del cliente. El límite se valida al confirmar el pedido, y el backoffice muestra un aviso cuando el total lo excede.
+---
+
+import ChangeItem from "../../components/ChangeItem.astro";
+import ReleaseGallery from "../../components/ReleaseGallery.astro";
+import avisoCreditoExcedido from "./v1-13-89-01.jpg";
+import confirmarRechazado from "./v1-13-89-02.jpg";
+
+## Nuevo
+
+<ul class="changes">
+  <ChangeItem title="Aviso de crédito excedido al confirmar una Cotización">
+    Al confirmar una Cotización, si el total supera el crédito disponible del cliente, aparece el aviso "El pedido excede el crédito disponible". El pedido se puede seguir editando, pero no se podrá confirmar mientras supere el límite. El aviso no aparece si está activada la opción "Ignorar límite de crédito".
+
+    <ReleaseGallery images={[avisoCreditoExcedido]} alt="Aviso de crédito excedido en una Cotización en Borrador" />
+
+  </ChangeItem>
+</ul>
+
+## Correcciones
+
+<ul class="changes">
+  <ChangeItem title="El límite de crédito ya no bloquea la edición de una Cotización">
+    Se pueden agregar productos o aumentar cantidades en una Cotización en Borrador aunque se supere el crédito disponible. La validación se aplica solo al confirmar el pedido: si se excede el crédito, la confirmación se rechaza y la Cotización sigue en Borrador.
+
+    <ReleaseGallery images={[confirmarRechazado]} alt="Confirmación rechazada por crédito excedido; la Cotización sigue en Borrador" />
+
+  </ChangeItem>
+</ul>
+
+## Otros
+
+<ul class="changes">
+  <ChangeItem title="Menos consultas al agregar productos o cambiar cantidades">
+    Agregar productos o cambiar cantidades en una Cotización ya no consulta el crédito del cliente cada vez, lo que hace la edición más ágil.
+  </ChangeItem>
+</ul>
