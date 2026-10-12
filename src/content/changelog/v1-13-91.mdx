@@ -1,0 +1,31 @@
+---
+apps: [backoffice, shoppingcart]
+version: "1.13.91"
+date: 2026-10-12T22:51:38Z
+title: Mostrar los datos del cliente al gestionar pedidos aunque sea de otro vendedor
+description: En el backoffice, la tarjeta del cliente al confirmar, surtir o recontar un pedido carga aunque el cliente sea de otro vendedor, y bodega puede consultar los datos de los clientes de los pedidos que surte.
+---
+
+import ChangeItem from "../../components/ChangeItem.astro";
+
+## Correcciones
+
+<ul class="changes">
+  <ChangeItem title="Datos del cliente visibles al gestionar un pedido de otro vendedor">
+    Al cambiar un pedido a un cliente de otro vendedor, o al confirmar, surtir o recontar un pedido de ese cliente, la tarjeta del cliente muestra nombre, teléfono, dirección y crédito. Antes se quedaba cargando sin mostrar nada. Si la consulta falla, aparece un mensaje de error y el botón para editar el cliente sigue disponible.
+  </ChangeItem>
+</ul>
+
+## Otros
+
+<ul class="changes">
+  <ChangeItem title="La tarjeta del cliente ya no muestra el correo">
+    En la gestión de pedidos, la tarjeta del cliente dejó de mostrar su correo electrónico.
+  </ChangeItem>
+  <ChangeItem title="Dependencias del frontend actualizadas por seguridad">
+    Se actualizaron dependencias del frontend a versiones que corrigen vulnerabilidades críticas. No hay cambios visibles para el usuario.
+  </ChangeItem>
+  <ChangeItem title="Datos de prueba del entorno de desarrollo">
+    Se corrigieron los datos de prueba del entorno de desarrollo, para que el ingreso al backoffice y los pedidos de prueba funcionen desde cero. No hay cambios visibles para el usuario.
+  </ChangeItem>
+</ul>
