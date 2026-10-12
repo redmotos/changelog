@@ -1,0 +1,48 @@
+---
+apps: [backoffice, shoppingcart]
+version: "1.13.90"
+date: 2026-10-12T17:27:25Z
+title: Limpiar datos al cambiar de sesión, validar el rol por ruta y mejorar el foco y los paneles laterales
+description: En el backoffice, los datos de una sesión anterior ya no se ven al entrar otro usuario, y cada rol accede solo a sus secciones. En el carrito, el registro enfoca el primer campo con error y los paneles laterales se cierran con Escape.
+---
+
+import ChangeItem from "../../components/ChangeItem.astro";
+
+## Nuevo
+
+<ul class="changes">
+  <ChangeItem title="Paneles laterales con animación de entrada y salida">
+    Los paneles laterales del backoffice y de la búsqueda de productos se deslizan al abrirse y al cerrarse. Mientras están abiertos, el scroll de la página de fondo queda bloqueado y el contenido del panel se desplaza por separado.
+  </ChangeItem>
+</ul>
+
+## Correcciones
+
+<ul class="changes">
+  <ChangeItem title="Los datos de una sesión anterior ya no se muestran">
+    Al cerrar sesión se limpia la información guardada en pantalla. Si otro usuario entra sin recargar la página, ya no ve datos de la sesión anterior.
+  </ChangeItem>
+  <ChangeItem title="Cada rol accede solo a sus secciones del backoffice">
+    Las rutas validan el rol del usuario, no solo el menú. Si se intenta abrir una sección sin permiso, desde el login o escribiendo la dirección, se redirige a la primera sección permitida.
+  </ChangeItem>
+  <ChangeItem title="Foco en el primer campo con error al registrarse">
+    Al enviar el formulario de registro con datos faltantes o inválidos, la página se desplaza hasta el primer campo con error y lo enfoca. Si solo falta aceptar los términos, el foco pasa a esa casilla.
+  </ChangeItem>
+  <ChangeItem title="Filtros en móvil se cierran con Escape">
+    El panel de filtros en móvil se cierra con la tecla Escape, con un clic fuera de él o con su botón. Al cerrarlo, el foco vuelve al botón Filtros.
+  </ChangeItem>
+</ul>
+
+## Otros
+
+<ul class="changes">
+  <ChangeItem title="Enlace Ver todos junto al carrusel de catálogos">
+    En el inicio, el enlace Ver todos de cada catálogo se muestra junto a los botones del carrusel. En móvil aparece debajo del título del catálogo.
+  </ChangeItem>
+  <ChangeItem title="Carruseles de productos con la misma lógica para agregar al carrito">
+    Los carruseles de recomendados y de catálogos usan la misma lógica para agregar productos, incluido el carrito de invitado. Los mensajes de confirmación y de error se toman del diccionario de textos.
+  </ChangeItem>
+  <ChangeItem title="Limpieza interna y ajustes de despliegue">
+    Se quitó código sin uso en el manejo de estados de pedidos, se centralizó el formato de montos del carrito y el checkout y el armado de los enlaces de paginación de productos. También se ajustó una dependencia del API para que el despliegue vuelva a completarse. No hay cambios visibles para el usuario.
+  </ChangeItem>
+</ul>
