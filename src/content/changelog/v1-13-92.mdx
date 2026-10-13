@@ -1,0 +1,60 @@
+---
+apps: [backoffice, catalogos, shoppingcart]
+version: "1.13.92"
+date: 2026-10-13T19:29:31Z
+title: Agregar productos ya contados en el reconteo, recargar la app tras un despliegue y corregir la carga de catálogos
+description: En el backoffice, los productos agregados durante el reconteo quedan contados y la app se recarga sola tras un despliegue. La app de catálogos vuelve a cargar en producción, y los clientes ya no se pueden consultar con datos de proveedores o empleados.
+---
+
+import ChangeItem from "../../components/ChangeItem.astro";
+import ReleaseGallery from "../../components/ReleaseGallery.astro";
+import catalogosAntes from "./v1-13-92-01.png";
+import catalogosDespues from "./v1-13-92-02.png";
+
+## Nuevo
+
+<ul class="changes">
+  <ChangeItem title="Productos agregados durante el reconteo ya quedan contados">
+    Al agregar productos desde el modal Agregar productos en el reconteo de un pedido, las líneas nuevas se guardan como surtidas y recontadas con la cantidad indicada. El pedido queda en "Verificando" y no vuelve a "Surtiendo".
+  </ChangeItem>
+</ul>
+
+## Correcciones
+
+<ul class="changes">
+  <ChangeItem title="La app se recarga sola tras un despliegue">
+    Si una pantalla del backoffice no carga porque hubo una versión nueva, la app se recarga automáticamente y muestra "Actualizando la aplicación…". Si el error se repite, aparece un mensaje con un botón para recargar, en lugar de la pantalla de error por defecto.
+  </ChangeItem>
+  <ChangeItem title="Aviso al agregar un producto que ya está en el pedido">
+    En la búsqueda del modal, los productos que ya están en el pedido se marcan con la cantidad que tienen. Si se eligen, aparece un aviso para cambiar la cantidad desde su línea y el botón Agregar queda deshabilitado. Antes el producto se descartaba sin avisar.
+  </ChangeItem>
+  <ChangeItem title="Error visible cuando falla la búsqueda de productos">
+    Si la búsqueda de productos falla al agregarlos a un pedido, el desplegable dice "Error al buscar" y aparece un aviso para intentar de nuevo, en lugar de "Sin coincidencias".
+  </ChangeItem>
+  <ChangeItem title="Listado de grupos de catálogos al borrar la última página">
+    Al borrar todos los grupos de la última página, el listado vuelve a la página anterior con los grupos que quedan, en lugar de mostrar "Aún no hay datos disponibles" y un paginador sin página activa.
+
+    <ReleaseGallery images={[catalogosAntes, catalogosDespues]} alt="Listado de grupos de catálogos antes y después de borrar la última página" />
+
+  </ChangeItem>
+  <ChangeItem title="Aviso cuando no cargan las sucursales en pedidos">
+    En el listado de pedidos, si no se pueden cargar las sucursales se muestra un aviso, en lugar de dejar el filtro solo con "Todos" sin explicación.
+  </ChangeItem>
+  <ChangeItem title="Clientes solo entre los registros de clientes">
+    Los proveedores, empleados y compañías ya no se pueden consultar ni vincular como si fueran clientes: al intentarlo, la app responde que el cliente no existe. Aplica al backoffice y al carrito de compras, en el cambio de cliente de un pedido, en el registro y en la vinculación de usuarios.
+  </ChangeItem>
+  <ChangeItem title="La app de catálogos vuelve a cargar en producción">
+    Se corrigió un error que impedía cargar la app de catálogos en la versión 1.13.91.
+  </ChangeItem>
+</ul>
+
+## Otros
+
+<ul class="changes">
+  <ChangeItem title="Ambiente de desarrollo aislado por worktree">
+    Cada worktree levanta su propio stack de API y base de datos, con comandos para iniciar cada app, ver sus puertos y limpiar la base. No hay cambios visibles para el usuario.
+  </ChangeItem>
+  <ChangeItem title="Datos de prueba del entorno de desarrollo">
+    Se corrigieron los datos de prueba de desarrollo: cada sucursal tiene su propio almacén, hay precios para todas las listas y un catálogo sugerido, para recorrer el flujo completo de pedidos. No hay cambios visibles para el usuario.
+  </ChangeItem>
+</ul>
