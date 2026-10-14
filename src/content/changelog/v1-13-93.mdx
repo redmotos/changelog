@@ -1,0 +1,37 @@
+---
+apps: [backoffice]
+version: "1.13.93"
+date: 2026-10-14T00:58:35Z
+title: Mostrar todos los catálogos asignados al cliente y avisar qué productos no pueden recibir un descuento
+description: En el backoffice, el detalle del cliente muestra todas sus asignaciones de catálogo, incluidas las vencidas. Al aplicar un descuento a un pedido, se avisa qué productos quedarían por debajo del costo y no lo reciben.
+---
+
+import ChangeItem from "../../components/ChangeItem.astro";
+import ReleaseGallery from "../../components/ReleaseGallery.astro";
+import clientesCatalogos from "./v1-13-93-01.png";
+import modalDescuento from "./v1-13-93-02.png";
+
+## Correcciones
+
+<ul class="changes">
+  <ChangeItem title="Todos los catálogos asignados en el detalle del cliente">
+    La pestaña Catálogos asignados muestra todas las asignaciones del cliente, con el total junto al título. Antes solo se veían 12, y los catálogos vencidos más allá de ese número no se podían ver, extender ni quitar.
+
+    <ReleaseGallery images={[clientesCatalogos]} alt="Pestaña Catálogos asignados del cliente con todas sus asignaciones y el total junto al título" />
+
+  </ChangeItem>
+  <ChangeItem title="Aviso de productos que quedarían bajo el costo al aplicar un descuento">
+    Al aplicar un descuento a un pedido, el modal indica los productos que no pueden recibirlo porque su precio quedaría por debajo del costo. El descuento se aplica al resto; si ningún producto puede recibirlo, se sugiere probar con un porcentaje menor. Antes el descuento se aplicaba sin avisar, y el pedido se podía confirmar con la venta por debajo del costo.
+
+    <ReleaseGallery images={[modalDescuento]} alt="Modal Aplicar Descuento con el aviso de un producto que no puede recibir el descuento porque quedaría bajo el costo" />
+
+  </ChangeItem>
+</ul>
+
+## Otros
+
+<ul class="changes">
+  <ChangeItem title="Exploración automática de la app">
+    Se recorrió la app en desktop y mobile con cada rol y se registraron hallazgos para revisar. No hay cambios visibles para el usuario.
+  </ChangeItem>
+</ul>
