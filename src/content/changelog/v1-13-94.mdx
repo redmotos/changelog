@@ -1,0 +1,88 @@
+---
+apps: [backoffice]
+version: "1.13.94"
+date: 2026-10-14T20:09:37Z
+title: Abrir facturas de Odoo, aplicar descuentos a productos filtrados y conservar filtros en los listados
+description: En el backoffice, las facturas de cuentas por cobrar se abren desde su referencia, y los listados conservan búsqueda, filtros y página al volver. Al aplicar un descuento, se puede limitar a los productos filtrados del pedido.
+---
+
+import ChangeItem from "../../components/ChangeItem.astro";
+import ReleaseGallery from "../../components/ReleaseGallery.astro";
+import descuentoPedido from "./v1-13-94-01.png";
+import descuentoPedidoMovil from "./v1-13-94-02.png";
+import descuentoModal from "./v1-13-94-03.png";
+import descuentoSinCoincidencias from "./v1-13-94-04.png";
+import listadoConservado from "./v1-13-94-05.png";
+import pedidoEliminado from "./v1-13-94-06.png";
+import catalogoQuitado from "./v1-13-94-07.png";
+import cuentasTarjetas from "./v1-13-94-08.png";
+import pedidoFichaCliente from "./v1-13-94-09.png";
+
+## Nuevo
+
+<ul class="changes">
+  <ChangeItem title="Abrir la factura de Odoo desde cuentas por cobrar">
+    La referencia de cada factura en Cuentas por cobrar es un enlace que abre la factura de Odoo en una pestaña nueva. Mientras se genera el PDF, el icono de descarga se reemplaza por un spinner. Si el navegador bloquea la pestaña, el PDF se descarga.
+  </ChangeItem>
+  <ChangeItem title="Aplicar descuento solo a los productos filtrados del pedido">
+    En Confirmar pedido, el buscador tiene un selector Catálogo / En el pedido. Con En el pedido, la tabla se filtra mientras se escribe, por nombre o código, sin distinguir mayúsculas ni acentos. El botón dice «Descuento (X)» y el modal aplica el descuento solo a esas líneas. El filtro se conserva después de aplicar el descuento.
+
+    <ReleaseGallery images={[descuentoPedido, descuentoPedidoMovil, descuentoModal, descuentoSinCoincidencias]} alt="Confirmar pedido con el selector En el pedido: tabla filtrada, botón Descuento con la cantidad, modal con los productos alcanzados y estado vacío cuando no hay coincidencias" />
+
+  </ChangeItem>
+</ul>
+
+## Correcciones
+
+<ul class="changes">
+  <ChangeItem title="Conservar búsqueda, filtros y página al volver a los listados">
+    Los listados de catálogos, clientes, usuarios y pedidos mantienen la búsqueda, los filtros y la página al abrir un detalle y volver con Atrás o con el breadcrumb. Antes se perdían al volver.
+
+    <ReleaseGallery images={[listadoConservado]} alt="Listado de catálogos con la búsqueda y el filtro conservados al volver desde el detalle" />
+
+  </ChangeItem>
+  <ChangeItem title="Actualizar el pedido si otra sesión ya eliminó un producto">
+    Si el producto ya había sido eliminado desde otra sesión, el backoffice muestra «No se encontró el producto o ya fue borrado por otro usuario» y actualiza el modal y la tabla. Antes aparecía un error genérico y la fila seguía visible.
+
+    <ReleaseGallery images={[pedidoEliminado]} alt="Modal de productos bajo el costo con el aviso de producto ya borrado por otro usuario" />
+
+  </ChangeItem>
+  <ChangeItem title="Actualizar la lista del catálogo si otra sesión ya quitó un producto">
+    Al quitar o agregar un producto de un catálogo, si el cambio falla, la lista y el contador de productos se actualizan solos. El aviso indica que el producto ya no estaba. Antes el error era genérico y el producto seguía en pantalla.
+
+    <ReleaseGallery images={[catalogoQuitado]} alt="Lista del catálogo actualizada a 1 producto con el aviso de producto ya eliminado por otro usuario" />
+
+  </ChangeItem>
+  <ChangeItem title="Facturas y pagos como tarjetas en el teléfono">
+    En la ficha del cliente, las cuentas por cobrar se muestran como tarjetas en pantallas chicas, con pendiente, vencimiento, mora y pagos a la vista. Antes la tabla quedaba fuera de pantalla y no se leían los pagos completos.
+
+    <ReleaseGallery images={[cuentasTarjetas]} alt="Cuentas por cobrar del cliente en el teléfono como tarjetas, con pendiente, mora y pagos legibles" />
+
+  </ChangeItem>
+  <ChangeItem title="Ver la ficha del cliente desde un pedido">
+    El nombre del cliente en Confirmar, Surtir y Recontar pedido abre su ficha. Al volver con Atrás, se regresa al pedido.
+
+    <ReleaseGallery images={[pedidoFichaCliente]} alt="Nombre del cliente en el pedido como enlace a su ficha" />
+
+  </ChangeItem>
+  <ChangeItem title="Mostrar el total de resultados en el listado de catálogos">
+    El listado de grupos de catálogos muestra «Mostrando X–Y de N resultados» junto al paginador, y el total respeta la búsqueda y el filtro de estado.
+  </ChangeItem>
+  <ChangeItem title="Cerrar el panel de filtros solo con el botón Filtros">
+    El panel de filtros ya no se cierra al hacer clic fuera de él. Se abre y se cierra con el botón Filtros, y la primera acción sobre la tabla responde de inmediato.
+  </ChangeItem>
+  <ChangeItem title="Esperar antes de filtrar por texto y número sin llenar el historial">
+    Los filtros de texto y número esperan 300 ms después de dejar de escribir antes de buscar. Filtrar ya no agrega entradas al historial del navegador, así que Atrás vuelve a la página anterior.
+  </ChangeItem>
+  <ChangeItem title="Mostrar saldo pendiente aunque no lleguen facturas">
+    Si un cliente tiene saldo pendiente pero no se reciben facturas asociadas, Cuentas por cobrar ya no dice que no tiene cuentas pendientes.
+  </ChangeItem>
+</ul>
+
+## Otros
+
+<ul class="changes">
+  <ChangeItem title="Exploración automática de la app">
+    Se recorrió la app en desktop y mobile con cada rol y se registraron hallazgos para revisar. No hay cambios visibles para el usuario.
+  </ChangeItem>
+</ul>
