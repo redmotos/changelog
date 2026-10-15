@@ -1,0 +1,20 @@
+---
+apps: [backoffice]
+version: "1.13.95"
+date: 2026-10-15T15:49:00Z
+title: Actualizar la última modificación de los catálogos y limitar las descargas de facturas en cuentas por cobrar
+description: La columna Última modificación de los catálogos muestra el último cambio, al editarlo o al agregar y quitar productos. En Cuentas por cobrar, solo las facturas con CAI tienen descarga.
+---
+
+import ChangeItem from "../../components/ChangeItem.astro";
+
+## Correcciones
+
+<ul class="changes">
+  <ChangeItem title="Actualizar la última modificación del catálogo al editarlo y al agregar o quitar productos">
+    La columna Última modificación de los catálogos refleja el último cambio, ya sea al editar el nombre, el estado, el tipo o los filtros, o al agregar o quitar productos. Antes quedaba con la fecha de creación.
+  </ChangeItem>
+  <ChangeItem title="Descargar como factura solo los documentos con CAI">
+    En Cuentas por cobrar, el enlace de descarga aparece solo en las facturas con CAI. Los documentos de almacén, los de diarios sin numeración fiscal y las notas de débito se listan como texto y no se pueden descargar como factura.
+  </ChangeItem>
+</ul>
