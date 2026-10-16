@@ -1,0 +1,108 @@
+---
+apps: [backoffice]
+version: "1.13.96"
+date: 2026-10-16T20:07:42Z
+title: Agregar el dashboard de catálogos y la gestión de catálogos globales, y corregir el surtido, las asignaciones y los formularios
+description: Catálogos tiene un dashboard con indicadores y ranking por clientes, y los catálogos globales se pueden extender, quitar o marcar desde el backoffice. Se corrigen el surtido en el teléfono, la asignación de catálogos vencidos y varios formularios.
+---
+
+import ChangeItem from "../../components/ChangeItem.astro";
+import ReleaseGallery from "../../components/ReleaseGallery.astro";
+import totalCatalogos from "./v1-13-96-01.png";
+import etiquetaProtegido from "./v1-13-96-02.png";
+import encabezadoPagina from "./v1-13-96-03.png";
+import pieModalTelefono from "./v1-13-96-04.png";
+import busquedaGrupo from "./v1-13-96-05.png";
+import volverTodosGrupos from "./v1-13-96-06.png";
+import surtirCantidad from "./v1-13-96-07.png";
+import imagenesRechazadas from "./v1-13-96-08.png";
+import dobleClicUsuario from "./v1-13-96-09.png";
+import rolObligatorio from "./v1-13-96-10.png";
+
+## Nuevo
+
+<ul class="changes">
+  <ChangeItem title="Ver el dashboard de catálogos">
+    Catálogos abre un dashboard con los indicadores de catálogos activos, globales vigentes y clientes con catálogo, los globales destacados y un ranking de catálogos por cantidad de clientes, con su próximo vencimiento.
+  </ChangeItem>
+  <ChangeItem title="Gestionar los catálogos globales">
+    En Catálogos globales se puede buscar y filtrar por vigencia y grupo, extender la vigencia, quitar un global o marcar otro catálogo como global. Los globales sin vencimiento no ofrecen extender, para no ponerles una fecha límite.
+  </ChangeItem>
+</ul>
+
+## Correcciones
+
+<ul class="changes">
+  <ChangeItem title="Mostrar el total de catálogos en la lista del grupo">
+    Bajo la tabla aparece «Mostrando X–Y de Z catálogos» junto a la paginación, igual que en el listado de grupos.
+
+    <ReleaseGallery images={[totalCatalogos]} alt="Pie Mostrando 11 a 14 de 14 catálogos junto a la paginación de la lista de un grupo" />
+
+  </ChangeItem>
+  <ChangeItem title="Mostrar completa la etiqueta Protegido en el teléfono">
+    En el listado de grupos del teléfono, la etiqueta Protegido pasa debajo del título en lugar de cortarse o tapar el botón Ver.
+
+    <ReleaseGallery images={[etiquetaProtegido]} alt="Etiqueta PROTEGIDO debajo del título de un grupo en el teléfono, sin tapar el botón Ver" />
+
+  </ChangeItem>
+  <ChangeItem title="Avisar que la búsqueda de clientes necesita 4 letras">
+    Con 1 a 3 letras en Buscar cliente, el listado indica que hay que escribir al menos 4 letras, en lugar de quedar vacío sin explicación.
+  </ChangeItem>
+  <ChangeItem title="Volver a asignar un catálogo vencido desde la ficha del cliente">
+    En el modal Asignar catálogos, un catálogo vencido aparece como Vencido con su fecha y se puede marcar para renovar la vigencia. Antes figuraba como ya asignado y no se podía elegir.
+  </ChangeItem>
+  <ChangeItem title="Ajustar el encabezado de las páginas en el teléfono">
+    Los botones del encabezado bajan debajo del título cuando no caben en la misma línea, así el título no desaparece.
+
+    <ReleaseGallery images={[encabezadoPagina]} alt="Encabezado del detalle de un grupo en el teléfono con el título completo y los botones debajo" />
+
+  </ChangeItem>
+  <ChangeItem title="Apilar el pie del modal y los botones de catálogos asignados en el teléfono">
+    El contador, la vigencia y el botón Asignar catálogos se leen completos en el teléfono, y los botones de la sección Catálogos asignados ya no quedan fuera de la pantalla.
+
+    <ReleaseGallery images={[pieModalTelefono]} alt="Pie del modal Asignar catálogos apilado en el teléfono con la vigencia de 24 horas legible" />
+
+  </ChangeItem>
+  <ChangeItem title="Buscar catálogos de un grupo sin distinguir mayúsculas ni espacios">
+    Buscar «lluvia» o «  LLUVIA  » dentro de un grupo encuentra los catálogos que coinciden, sin importar las mayúsculas ni los espacios de más.
+
+    <ReleaseGallery images={[busquedaGrupo]} alt="Búsqueda lluvia dentro del grupo TEMPORADA LLUVIAS que encuentra LLANTAS LLUVIA" />
+
+  </ChangeItem>
+  <ChangeItem title="Volver a Todos los grupos en el modal de asignar catálogos">
+    Después de elegir un grupo se puede volver a Todos los grupos. Al cerrar el modal se limpian lo marcado, la búsqueda y el grupo elegido.
+
+    <ReleaseGallery images={[volverTodosGrupos]} alt="Modal Asignar catálogos con la opción Todos los grupos disponible y sin catálogos marcados al reabrirlo" />
+
+  </ChangeItem>
+  <ChangeItem title="Mostrar Recontar en los pedidos que ya se están verificando">
+    En Gestión de pedidos, los pedidos en Verificando o Recontando muestran el botón Recontar en lugar de Surtir, que llevaba al reconteo sin decirlo.
+  </ChangeItem>
+  <ChangeItem title="Precargar la cantidad pedida al surtir">
+    Al surtir, la cantidad viene con lo pedido y se confirma con Enter. En el teléfono, el primer dígito reemplaza el valor precargado.
+
+    <ReleaseGallery images={[surtirCantidad]} alt="Surtir un producto con la cantidad pedida precargada y confirmada con Enter" />
+
+  </ChangeItem>
+  <ChangeItem title="Marcar en rojo las imágenes rechazadas en la carga masiva">
+    Cada imagen rechazada muestra su motivo, como Sin producto con ese código o Supera los 2 MB, y no cuenta para el botón Subir. El aviso indica cuántas imágenes se subieron y cuáles no.
+
+    <ReleaseGallery images={[imagenesRechazadas]} alt="Carga masiva de imágenes con un archivo en rojo por Sin producto con ese código y el aviso de subida parcial" />
+
+  </ChangeItem>
+  <ChangeItem title="Ignorar el doble clic en Guardar del formulario de usuario">
+    Un segundo clic en Guardar mientras se guarda el usuario no envía el formulario otra vez, así que aparece un solo aviso.
+
+    <ReleaseGallery images={[dobleClicUsuario]} alt="Formulario de usuario guardado con un solo aviso de éxito tras el doble clic" />
+
+  </ChangeItem>
+  <ChangeItem title="Exigir el rol al crear un usuario">
+    El Rol empieza en Selecciona un rol y, al crear un usuario, solo ofrece Vendedor y Cliente. Guardar pide elegir un rol antes de enviar el formulario.
+
+    <ReleaseGallery images={[rolObligatorio]} alt="Formulario de nuevo usuario con Rol en Selecciona un rol y el aviso El rol es requerido" />
+
+  </ChangeItem>
+  <ChangeItem title="Surtir a ritmo normal en el teléfono">
+    Surtir un pedido en el teléfono ya no se frena con el aviso de límite de peticiones. Cada usuario tiene su propio límite, así que dos personas en la misma red no se bloquean entre sí.
+  </ChangeItem>
+</ul>
