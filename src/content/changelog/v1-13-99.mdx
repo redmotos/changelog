@@ -1,0 +1,34 @@
+---
+apps: [backoffice]
+version: "1.13.99"
+date: 2026-10-17T19:04:35Z
+title: Mostrar precios sin ISV en los pedidos y la columna Inventario junto a Cantidad
+description: En las pestañas «En el pedido» y «Catálogo», el precio y el total de cada producto se muestran sin el 15% de ISV. La columna Inventario se ubica a la derecha de Cantidad.
+---
+
+import ChangeItem from "../../components/ChangeItem.astro";
+import ReleaseGallery from "../../components/ReleaseGallery.astro";
+import sinIsv1 from "./v1-13-99-01.png";
+import sinIsv2 from "./v1-13-99-02.png";
+import sinIsv3 from "./v1-13-99-03.png";
+import inventario1 from "./v1-13-99-04.png";
+import inventario2 from "./v1-13-99-05.png";
+import inventario3 from "./v1-13-99-06.png";
+
+## Nuevo
+
+<ul class="changes">
+  <ChangeItem title="Mostrar precios sin ISV en las pestañas En el pedido y Catálogo">
+    Los precios y totales de cada producto se muestran sin el 15% de ISV, también en los productos con descuento. Los encabezados dicen «Precio (sin ISV)» y «Total (sin ISV)». El TOTAL general, el límite de crédito y el modal de confirmación siguen incluyendo el ISV.
+
+    <ReleaseGallery images={[sinIsv1, sinIsv2, sinIsv3]} alt="Precios y totales sin ISV en las pestañas En el pedido y Catálogo, con el TOTAL general en la vista de escritorio y en el teléfono" />
+
+  </ChangeItem>
+
+  <ChangeItem title="Mostrar la columna Inventario a la derecha de Cantidad">
+    En la lista de productos del pedido, la columna Inventario aparece justo después de Cantidad. El orden queda: Producto, Precio, Total, Cantidad e Inventario. Aplica en «En el pedido» y en «Catálogo».
+
+    <ReleaseGallery images={[inventario1, inventario2, inventario3]} alt="Columnas del pedido en el orden Producto, Precio, Total, Cantidad e Inventario, en escritorio y en el teléfono" />
+
+  </ChangeItem>
+</ul>
