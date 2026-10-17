@@ -1,0 +1,17 @@
+---
+apps: [backoffice]
+version: "1.13.100"
+date: 2026-10-17T20:18:27Z
+title: Confirmar y validar en Odoo la cotización al cerrar el pedido
+description: Al cerrar un pedido en el backoffice, la cotización ahora se confirma y se valida en Odoo, igual que en Catálogos. Antes el pedido quedaba surtido sin validarse y no quedaba listo para facturar.
+---
+
+import ChangeItem from "../../components/ChangeItem.astro";
+
+## Correcciones
+
+<ul class="changes">
+  <ChangeItem title="Confirmar y validar la cotización en Odoo al cerrar el pedido">
+    Si no se marca «Omitir verificación», la cotización se crea, se confirma y se valida en Odoo al cerrar el pedido. Con «Omitir verificación» marcada, el pedido se marca como surtido sin validar la cotización.
+  </ChangeItem>
+</ul>
