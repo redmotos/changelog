@@ -1,0 +1,63 @@
+---
+apps: [backoffice]
+version: "1.13.97"
+date: 2026-10-17T17:57:15Z
+title: Mostrar la foto de cada producto al confirmar pedidos y corregir avisos al eliminar pedidos y catálogos, y formularios
+description: En la confirmación del pedido cada producto muestra su foto y se puede ampliar. Se corrigen el aviso de pedidos eliminados al surtir, la flecha de pagos en escritorio, los errores al crear usuarios, el buscador del encabezado y la eliminación de catálogos.
+---
+
+import ChangeItem from "../../components/ChangeItem.astro";
+import ReleaseGallery from "../../components/ReleaseGallery.astro";
+import fotoCatalogo from "./v1-13-97-01.png";
+import fotoAmpliada from "./v1-13-97-02.png";
+import fotoTelefono from "./v1-13-97-03.png";
+import pedidoEliminado from "./v1-13-97-04.png";
+import pagosFactura from "./v1-13-97-05.png";
+import errorUsuario from "./v1-13-97-06.png";
+import dobleClicCatalogo from "./v1-13-97-07.png";
+
+## Nuevo
+
+<ul class="changes">
+  <ChangeItem title="Ver la foto de cada producto al confirmar pedidos">
+    En la confirmación del pedido, cada producto muestra su foto en pequeño a la izquierda del nombre, tanto en «En el pedido» como en «Catálogo». Al hacer clic en la foto se amplía sobre la pantalla, y se cierra con la X, haciendo clic fuera o con Esc. Los productos sin foto muestran un recuadro gris.
+
+    <ReleaseGallery images={[fotoCatalogo, fotoAmpliada, fotoTelefono]} alt="Foto del producto en la confirmación del pedido: miniatura junto al nombre, ampliada al hacer clic y en la vista de teléfono" />
+
+  </ChangeItem>
+</ul>
+
+## Correcciones
+
+<ul class="changes">
+  <ChangeItem title="Avisar cuando el pedido fue eliminado al surtir o recontar">
+    Si el pedido se elimina desde otra sesión, la pantalla de surtido y recuento avisa que ya no se puede surtir, recontar ni editar, con un botón para volver a pedidos. Al recargar, aparece el mismo aviso en lugar de una pantalla en blanco, y el servidor rechaza esas acciones sobre pedidos eliminados.
+
+    <ReleaseGallery images={[pedidoEliminado]} alt="Aviso de pedido eliminado en la pantalla de surtido, con el botón Volver a pedidos" />
+
+  </ChangeItem>
+  <ChangeItem title="Mostrar la flecha Ver pagos en cada factura de escritorio">
+    En la pestaña Cuentas por cobrar de la ficha del cliente, cada factura tiene una flecha que despliega sus pagos, igual que el botón que ya existía en el teléfono.
+
+    <ReleaseGallery images={[pagosFactura]} alt="Tabla de cuentas por cobrar en escritorio con la flecha Ver pagos en cada factura y el desglose de pagos abierto" />
+
+  </ChangeItem>
+  <ChangeItem title="Mostrar el error de usuario existente al crear un usuario">
+    Si el nombre de usuario ya existe, el rol no está permitido o el cliente ya tiene un usuario, el mensaje aparece debajo del campo que hay que corregir, y el foco pasa a ese campo. Antes se mostraba solo un aviso genérico.
+
+    <ReleaseGallery images={[errorUsuario]} alt="Formulario de usuario nuevo con el campo Usuario marcado en rojo y el mensaje de usuario existente debajo" />
+
+  </ChangeItem>
+  <ChangeItem title="Quitar el buscador sin función del encabezado">
+    El campo Buscar... del encabezado no hacía nada al escribir y presionar Enter, así que se quitó. A la derecha del encabezado quedan solo el avatar y el nombre del usuario.
+  </ChangeItem>
+  <ChangeItem title="Ignorar el doble clic al eliminar un catálogo">
+    Al hacer doble clic en Eliminar del modal de eliminar catálogo se envía una sola eliminación y aparece un solo aviso, en lugar de avisos repetidos o contradictorios.
+
+    <ReleaseGallery images={[dobleClicCatalogo]} alt="Modal de eliminar catálogo con un solo aviso de Catálogo eliminado tras el doble clic" />
+
+  </ChangeItem>
+  <ChangeItem title="No cerrar el modal mientras se elimina un pedido">
+    Mientras se elimina un pedido, el modal no se puede cerrar con Esc, la X ni haciendo clic fuera. El aviso indica el número del pedido eliminado, y el contador de Creados se actualiza junto con la lista.
+  </ChangeItem>
+</ul>
