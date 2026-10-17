@@ -1,0 +1,34 @@
+---
+apps: [backoffice]
+version: "1.13.98"
+date: 2026-10-17T18:23:43Z
+title: Marcar todos los catálogos de un cliente para extender o quitar y mostrar la hora de creación de los pedidos
+description: En el detalle de un cliente se puede marcar todos sus catálogos de una vez para extender la vigencia o quitarlos. En la lista de pedidos, la columna «Creación» muestra también la hora y los minutos, en hora de Honduras.
+---
+
+import ChangeItem from "../../components/ChangeItem.astro";
+import ReleaseGallery from "../../components/ReleaseGallery.astro";
+import marcarTodos1 from "./v1-13-98-01.png";
+import marcarTodos2 from "./v1-13-98-02.png";
+import marcarTodos3 from "./v1-13-98-03.png";
+import horaCreacion1 from "./v1-13-98-04.png";
+import horaCreacion2 from "./v1-13-98-05.png";
+import horaCreacion3 from "./v1-13-98-06.png";
+
+## Nuevo
+
+<ul class="changes">
+  <ChangeItem title="Marcar todos los catálogos de un cliente">
+    En la lista de catálogos asignados del detalle de un cliente aparece una casilla arriba, junto a «Catálogo», para marcar todos de una vez. Al marcarla aparecen «Extender vigencia» y «Quitar», que se aplican a todos los catálogos del cliente. Los catálogos globales no se modifican.
+
+    <ReleaseGallery images={[marcarTodos1, marcarTodos2, marcarTodos3]} alt="Casilla para marcar todos los catálogos de un cliente, con las acciones de extender vigencia y quitar" />
+
+  </ChangeItem>
+
+  <ChangeItem title="Mostrar la hora de creación de los pedidos">
+    En la lista de Gestión de pedidos, la columna «Creación» muestra la hora y los minutos debajo de la fecha, en hora de Honduras. La columna «Vencimiento» sigue mostrando solo la fecha.
+
+    <ReleaseGallery images={[horaCreacion1, horaCreacion2, horaCreacion3]} alt="Columna Creación con la fecha y la hora de creación de cada pedido" />
+
+  </ChangeItem>
+</ul>
