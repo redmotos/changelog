@@ -1,0 +1,62 @@
+---
+apps: [backoffice]
+version: "1.13.102"
+date: 2026-10-18T19:26:49Z
+title: Numerar las líneas del pedido, mostrar la existencia junto al código y aclarar el dashboard de catálogos
+description: Los productos del pedido llevan su número de línea y la existencia por sucursal junto al código. Al eliminar un producto se puede indicar que va en otra orden, y la búsqueda «En el pedido» encuentra productos por palabras sueltas en cualquier orden.
+---
+
+import ChangeItem from "../../components/ChangeItem.astro";
+import ReleaseGallery from "../../components/ReleaseGallery.astro";
+import numerarLineas1 from "./v1-13-102-01.png";
+import numerarLineas2 from "./v1-13-102-02.png";
+import numerarLineas3 from "./v1-13-102-03.png";
+import existencia1 from "./v1-13-102-04.png";
+import existencia2 from "./v1-13-102-05.png";
+import otraOrden1 from "./v1-13-102-06.png";
+import otraOrden2 from "./v1-13-102-07.png";
+import dashboard1 from "./v1-13-102-08.png";
+import buscaPalabras1 from "./v1-13-102-09.png";
+
+## Nuevo
+
+<ul class="changes">
+  <ChangeItem title="Numerar las líneas de productos en el pedido">
+    Cada producto lleva su número a la izquierda, así el último número indica cuántas líneas tiene el pedido. Al filtrar en «En el pedido», cada producto conserva su número del pedido, y en «Catálogo» solo se numeran los productos que ya están en el pedido. En el teléfono, el número aparece junto al nombre.
+
+    <ReleaseGallery images={[numerarLineas1, numerarLineas2, numerarLineas3]} alt="Líneas del pedido numeradas en escritorio, con el filtro aplicado y en el teléfono" />
+
+  </ChangeItem>
+
+  <ChangeItem title="Mostrar la existencia junto al código del producto">
+    La existencia por sucursal aparece debajo de la descripción, junto al código, y se resalta en rojo cuando no alcanza para la cantidad pedida. Se quitó la columna Inventario, para no mostrar el dato dos veces.
+
+    <ReleaseGallery images={[existencia1, existencia2]} alt="Existencia por sucursal junto al código del producto en las pestañas En el pedido y Catálogo, sin columna Inventario" />
+
+  </ChangeItem>
+
+  <ChangeItem title="Agregar el motivo «Va en otra orden» al eliminar productos">
+    Al eliminar un producto del pedido, «Va en otra orden» aparece como quinto motivo, debajo de «No encontrado». Está disponible en el detalle del pedido, en surtir y en recontar.
+
+    <ReleaseGallery images={[otraOrden1, otraOrden2]} alt="Motivo Va en otra orden en el modal para eliminar un producto, en escritorio y en el teléfono" />
+
+  </ChangeItem>
+
+  <ChangeItem title="Hacer más claro el dashboard de catálogos">
+    Cada recuadro explica qué cuenta, y la tabla indica cuántos clientes vencen en el tiempo restante, por ejemplo «2 de 11 clientes vencen en 15 min». Si no hay catálogos globales, el bloque vacío se reduce a una franja con su enlace.
+
+    <ReleaseGallery images={[dashboard1]} alt="Dashboard de catálogos con los recuadros explicados, la franja de catálogos globales y la tabla de vencimientos" />
+
+  </ChangeItem>
+</ul>
+
+## Correcciones
+
+<ul class="changes">
+  <ChangeItem title="Encontrar productos en «En el pedido» al buscar por palabras sueltas">
+    La búsqueda muestra las líneas cuyo nombre o código contienen cada una de las palabras escritas, en cualquier orden. Por ejemplo, «CATA 520» encuentra «CATARINA ( DM150 MOD VIEJO ) CURBA XM200Z 520H-42T ALZE».
+
+    <ReleaseGallery images={[buscaPalabras1]} alt="Búsqueda Prod Demo en la pestaña En el pedido, que ahora muestra la línea Producto Demo" />
+
+  </ChangeItem>
+</ul>
