@@ -1,0 +1,91 @@
+---
+apps: [backoffice]
+version: "1.13.101"
+date: 2026-10-18T18:35:21Z
+title: Editar el stock mínimo desde la lista de catálogos y corregir acciones, búsquedas y avisos en pedidos y catálogos
+description: Desde el detalle de un grupo de catálogos se edita el stock mínimo de cada catálogo estándar. También se corrigen la visibilidad de las acciones en las tablas, la búsqueda de clientes sin tildes, el contador de pedidos al eliminar, la página al eliminar el último pedido y el motivo No encontrado al eliminar productos de pedidos creados.
+---
+
+import ChangeItem from "../../components/ChangeItem.astro";
+import ReleaseGallery from "../../components/ReleaseGallery.astro";
+import accionesFijas from "./v1-13-101-01.png";
+import contadorPestana from "./v1-13-101-02.png";
+import anchoClientes from "./v1-13-101-03.png";
+import encabezadoGrupo from "./v1-13-101-04.png";
+import paginaAnterior from "./v1-13-101-05.png";
+import stockMinimo from "./v1-13-101-06.png";
+import motivoSinEncontrar1 from "./v1-13-101-07.png";
+import motivoSinEncontrar2 from "./v1-13-101-08.png";
+
+## Nuevo
+
+<ul class="changes">
+  <ChangeItem title="Editar el stock mínimo desde la lista de catálogos del grupo">
+    En el detalle de un grupo de catálogos, la columna Stock mínimo permite cambiar el valor de cada catálogo estándar sin entrar a cada uno: se guarda con Enter o con el botón de confirmar, y Esc restaura el valor anterior. Solo acepta números enteros mayores o iguales a 0, o un campo vacío para no aplicar filtro. Los catálogos personalizados muestran un guion, y en los grupos protegidos el valor es solo de lectura.
+
+    <ReleaseGallery images={[stockMinimo]} alt="Columna Stock mínimo en el detalle de un grupo de catálogos, con el valor editable en los catálogos estándar" />
+
+  </ChangeItem>
+</ul>
+
+## Correcciones
+
+<ul class="changes">
+  <ChangeItem title="Mantener visibles las acciones de las tablas con muchas columnas">
+    En escritorio, la columna de acciones queda fija al borde derecho de la tabla de pedidos, así que Surtir, Eliminar y Confirmar se ven sin desplazar la tabla. La sombra de la columna solo aparece mientras queda contenido por la derecha.
+
+    <ReleaseGallery images={[accionesFijas]} alt="Tabla de pedidos con la columna de acciones fija a la derecha, con los botones Surtir y Eliminar visibles en cada fila" />
+
+  </ChangeItem>
+
+  <ChangeItem title="Actualizar el número de la pestaña al eliminar un pedido">
+    Al eliminar un pedido, el contador de la pestaña baja de inmediato y coincide con la cantidad de resultados de la lista, sin necesidad de recargar la página.
+
+    <ReleaseGallery images={[contadorPestana]} alt="Pestaña Creados con su contador actualizado al eliminar un pedido, junto a la leyenda de resultados" />
+
+  </ChangeItem>
+
+  <ChangeItem title="Dar más ancho a los clientes en Asignar catálogos">
+    En escritorio, la lista de catálogos ocupa un tercio de la pantalla y la de clientes con el catálogo seleccionado ocupa dos tercios. Así Extender y Quitar se ven junto a cada cliente sin desplazar la tabla.
+
+    <ReleaseGallery images={[anchoClientes]} alt="Pantalla Asignar catálogos con la lista de catálogos a la izquierda y los clientes con su botón Extender y Quitar a la derecha" />
+
+  </ChangeItem>
+
+  <ChangeItem title="Ignorar el doble clic en Quitar y Extender">
+    En el modal de clientes asignados, un doble clic en Quitar o Extender envía la acción una sola vez y muestra un solo aviso de confirmación.
+  </ChangeItem>
+
+  <ChangeItem title="Encontrar clientes al buscar sin tildes, ñ ni apóstrofos">
+    La búsqueda de clientes en Asignar catálogos encuentra el nombre aunque se escriba sin tildes, sin ñ o sin apóstrofo. Las búsquedas con tilde exacta siguen funcionando igual.
+  </ChangeItem>
+
+  <ChangeItem title="Mostrar si el grupo de catálogos está activo o inactivo">
+    El encabezado del grupo muestra una etiqueta de estado junto a Editar grupo, verde si está activo y roja si está inactivo. La etiqueta se actualiza al guardar el cambio, sin recargar la página.
+
+    <ReleaseGallery images={[encabezadoGrupo]} alt="Encabezado del grupo de catálogos con la etiqueta Grupo inactivo junto al botón Editar grupo" />
+
+  </ChangeItem>
+
+  <ChangeItem title="Volver a la última página con datos al eliminar el último pedido de una página">
+    Si al eliminar el único pedido de una página no queda ninguno, la lista vuelve a la última página que tiene datos en lugar de quedar vacía sin paginación.
+
+    <ReleaseGallery images={[paginaAnterior]} alt="Lista de pedidos después de eliminar el único pedido de la última página, mostrando la página anterior con su paginación" />
+
+  </ChangeItem>
+
+  <ChangeItem title="Quitar el motivo No encontrado al eliminar productos de pedidos creados">
+    Al eliminar un producto de un pedido creado o de una cotización, el motivo No encontrado ya no aparece en el modal. Almacén sigue viéndolo al surtir o recontar pedidos confirmados.
+
+    <ReleaseGallery images={[motivoSinEncontrar1, motivoSinEncontrar2]} alt="Modal para eliminar un producto de un pedido en confirmación, con tres motivos sin No encontrado, y el mismo modal en un pedido en surtido con los cuatro motivos" />
+
+  </ChangeItem>
+</ul>
+
+## Otros
+
+<ul class="changes">
+  <ChangeItem title="Exploración automática de la app">
+    Se recorrió la app en desktop y mobile con cada rol y se registraron hallazgos para revisar. No hay cambios visibles para el usuario.
+  </ChangeItem>
+</ul>
