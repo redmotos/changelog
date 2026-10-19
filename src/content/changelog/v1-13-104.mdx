@@ -1,0 +1,31 @@
+---
+apps: [backoffice]
+version: "1.13.104"
+date: 2026-10-19T21:48:37Z
+title: Agregar un interruptor para ver los precios del pedido con o sin ISV
+description: En la pantalla de confirmar pedido, el interruptor «Ver precios con ISV» muestra el precio y el total de cada producto con o sin el 15% de ISV. El total del pedido no cambia.
+---
+
+import ChangeItem from "../../components/ChangeItem.astro";
+import ReleaseGallery from "../../components/ReleaseGallery.astro";
+import conIsv1 from "./v1-13-104-01.png";
+import conIsv2 from "./v1-13-104-02.png";
+import catalogoIsv from "./v1-13-104-03.png";
+
+## Nuevo
+
+<ul class="changes">
+  <ChangeItem title="Interruptor para ver precios con ISV">
+    Junto a «Ignorar límite de crédito» aparece el interruptor «Ver precios con ISV». Apagado, los precios y totales de cada producto siguen sin ISV. Al encenderlo, el precio, el precio con descuento y el total de cada línea se muestran con el 15% incluido, y los encabezados dicen «(con ISV)». El total del pedido y el crédito disponible no cambian, y el interruptor vuelve a apagarse en cada visita. En el teléfono queda en su propia línea, debajo de «Ignorar límite de crédito».
+
+    <ReleaseGallery images={[conIsv1, conIsv2]} alt="Pantalla del pedido con el interruptor Ver precios con ISV encendido, en escritorio y en el teléfono" />
+
+  </ChangeItem>
+
+  <ChangeItem title="Precios con ISV también en el catálogo">
+    Al buscar productos en el catálogo con el interruptor encendido, sus precios también se muestran con el 15% de ISV.
+
+    <ReleaseGallery images={[catalogoIsv]} alt="Búsqueda en el catálogo del pedido con el interruptor Ver precios con ISV encendido, con los precios incluyendo ISV" />
+
+  </ChangeItem>
+</ul>
