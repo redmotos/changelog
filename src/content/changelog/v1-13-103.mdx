@@ -1,0 +1,90 @@
+---
+apps: [backoffice]
+version: "1.13.103"
+date: 2026-10-19T04:55:56Z
+title: Eliminar pedidos desde su propia pantalla, separar el reconteo en Pendientes y Listos, y corregir búsquedas, totales y avisos en pedidos y catálogos
+description: Desde la pantalla de un pedido se elimina sin volver a la lista, y el reconteo se separa en Pendientes y Listos como el surtido. Se corrigen la búsqueda de pedidos y de productos con tildes, los totales sin ISV, los grupos de catálogos con el mismo título, las pestañas en el teléfono, el descuento con Enter y la confirmación de pedidos sin productos.
+---
+
+import ChangeItem from "../../components/ChangeItem.astro";
+import ReleaseGallery from "../../components/ReleaseGallery.astro";
+import pendientesListos from "./v1-13-103-01.png";
+import tituloDuplicado from "./v1-13-103-02.png";
+import pestanasTelefono from "./v1-13-103-03.png";
+import totalLinea from "./v1-13-103-04.png";
+import pedidoSinProductos from "./v1-13-103-05.png";
+
+## Nuevo
+
+<ul class="changes">
+  <ChangeItem title="Eliminar el pedido desde su propia pantalla">
+    El botón Eliminar pedido aparece en el encabezado de Confirmar, Surtir y Recontar, con el mismo aviso de la lista. Al eliminarlo se vuelve a la lista en la pestaña que corresponde al pedido: Creados para pedidos creados y cotizaciones, o Confirmados para pedidos confirmados.
+  </ChangeItem>
+
+  <ChangeItem title="Separar el reconteo en las pestañas Pendientes y Listos">
+    El reconteo usa el mismo formato que el surtido. Las líneas sin recontar están en Pendientes y las ya recontadas en Listos, así la lista se va acortando al recontar.
+
+    <ReleaseGallery images={[pendientesListos]} alt="Pestañas Pendientes (17) activa y Listos (2) en el reconteo de escritorio, con solo las líneas pendientes en la lista" />
+
+  </ChangeItem>
+</ul>
+
+## Correcciones
+
+<ul class="changes">
+  <ChangeItem title="No permitir dos grupos de catálogos con el mismo título">
+    Al crear o renombrar un grupo, si otro grupo activo ya tiene ese título, se muestra el aviso «Ya existe un grupo llamado…» y no se guarda. La comparación no distingue mayúsculas ni espacios sobrantes.
+
+    <ReleaseGallery images={[tituloDuplicado]} alt="Formulario Editar grupo de catálogos con el título marcado en rojo y el aviso Ya existe un grupo llamado «CATALOGOS_AUTOMATICOS»" />
+
+  </ChangeItem>
+
+  <ChangeItem title="Pedir al menos 4 letras al buscar en Catálogo">
+    En Confirmar pedido, con 1 a 3 letras la pestaña Catálogo muestra un aviso en lugar de las líneas del pedido. Los resultados de una búsqueda anterior también se quitan al bajar de 4 letras.
+  </ChangeItem>
+
+  <ChangeItem title="Mostrar las pestañas de pedidos completas en el teléfono">
+    Creados, Confirmados y Surtidos caben en la pantalla del teléfono sin correr la lista a la izquierda. Si algún día no caben, la franja de pestañas se desplaza sola.
+
+    <ReleaseGallery images={[pestanasTelefono]} alt="Pestañas Creados, Confirmados y Surtidos completas en un teléfono, con la lista de pedidos debajo" />
+
+  </ChangeItem>
+
+  <ChangeItem title="Calcular el total de cada línea sin ISV con el precio mostrado">
+    El total de la línea es el precio mostrado por la cantidad. El ISV se aplica una sola vez sobre el subtotal del pedido, así el total general cuadra con las líneas.
+
+    <ReleaseGallery images={[totalLinea]} alt="Línea de Filtro de Aceite Demo con precio sin ISV de L228.26 y total sin ISV de L2,282.60 con 10 unidades" />
+
+  </ChangeItem>
+
+  <ChangeItem title="Conservar el reconteo al cancelar una corrección">
+    Al editar un producto ya recontado y cancelar la corrección, el reconteo guardado y quién lo hizo se mantienen.
+  </ChangeItem>
+
+  <ChangeItem title="Buscar pedidos sin distinguir mayúsculas ni tildes">
+    En Pedidos, el filtro Cliente encuentra los pedidos aunque el nombre se escriba en minúsculas o sin tildes. Antes, por ejemplo, «cliente default» no devolvía resultados.
+  </ChangeItem>
+
+  <ChangeItem title="Tomar líneas bloqueadas en el reconteo y liberarlas al cancelar">
+    Si otra persona dejó una línea bloqueada a medias, se puede tomar desde el modal Tomar producto bloqueado. Al cancelar, la línea queda libre si todavía no está recontada.
+  </ChangeItem>
+
+  <ChangeItem title="Encontrar productos en Catálogo aunque la búsqueda lleve tildes o ñ">
+    Buscar «bujía» encuentra «Bujia Demo», y buscar «bujia» encuentra los productos guardados con tilde.
+  </ChangeItem>
+
+  <ChangeItem title="Aplicar el descuento con Enter">
+    En el modal de descuento, el campo de porcentaje recibe el foco al abrirse y Enter aplica el descuento, igual que el botón, cuando el valor es válido.
+  </ChangeItem>
+
+  <ChangeItem title="No permitir confirmar un pedido sin productos">
+    Si el pedido se queda sin productos, Confirmar pedido queda desactivado y la tabla explica cómo agregarlos desde Catálogo. La API también rechaza confirmar un pedido vacío.
+
+    <ReleaseGallery images={[pedidoSinProductos]} alt="Pedido sin productos con Confirmar pedido desactivado y un mensaje que explica cómo agregar productos desde Catálogo" />
+
+  </ChangeItem>
+
+  <ChangeItem title="Poner el cursor en el campo al recontar y guardar con Enter">
+    En escritorio, al recontar una línea el cursor queda en Cantidad recontada, y Enter guarda el valor igual que el botón Confirmar.
+  </ChangeItem>
+</ul>
