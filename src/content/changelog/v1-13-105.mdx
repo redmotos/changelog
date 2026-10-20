@@ -1,0 +1,51 @@
+---
+apps: [backoffice]
+version: "1.13.105"
+date: 2026-10-20T15:19:39Z
+title: Ver pedidos surtidos en solo lectura, quitar descuentos y buscar con o sin tilde en el reconteo
+description: Los pedidos surtidos se pueden consultar en una pantalla de solo lectura, con sus datos, totales y quién surtió y recontó cada producto. También se puede quitar el descuento de las líneas del pedido, y el reconteo encuentra productos con o sin tilde.
+---
+
+import ChangeItem from "../../components/ChangeItem.astro";
+import ReleaseGallery from "../../components/ReleaseGallery.astro";
+import verPedido1 from "./v1-13-105-01.png";
+import verPedido2 from "./v1-13-105-02.png";
+import quitarDescuento from "./v1-13-105-03.png";
+
+## Nuevo
+
+<ul class="changes">
+  <ChangeItem title="Ver pedidos surtidos en una pantalla de solo lectura">
+    Al darle «Ver» a un pedido surtido se abre el pedido tal como quedó antes de facturarse, sin poder cambiar nada. Muestra los datos del cliente y el comentario, la fecha y quién levantó el pedido, vendedor, sucursal, lista de precios y cotización, y los totales con descuento e ISV. Cada producto muestra la cantidad pedida, surtida y recontada, quién la surtió y recontó, y cuándo. Las cantidades que no cuadran con lo pedido salen en rojo, y el buscador encuentra productos con o sin tildes.
+
+    <ReleaseGallery images={[verPedido1, verPedido2]} alt="Pantalla Ver pedido en computadora y en teléfono, con los datos del cliente y una tarjeta por producto con sus cantidades y quién lo surtió y recontó" />
+
+  </ChangeItem>
+</ul>
+
+## Correcciones
+
+<ul class="changes">
+  <ChangeItem title="Quitar el descuento de las líneas del pedido">
+    En el modal Aplicar Descuento aparece el botón «Quitar descuento» cuando alguna de las líneas elegidas ya tiene descuento, y deja esas líneas en su precio original. El porcentaje debe estar entre 1 y 20, y si el valor no se admite el campo lo indica antes de enviar, en lugar de mostrar el error genérico.
+
+    <ReleaseGallery images={[quitarDescuento]} alt="Modal Aplicar Descuento que avisa que dos productos ya tienen descuento, con el botón Quitar descuento junto a Cancelar y Aplicar" />
+
+  </ChangeItem>
+
+  <ChangeItem title="Encontrar productos con o sin tilde al buscar en el reconteo">
+    El buscador de Recontar ignora tildes y mayúsculas, así que «neumático» encuentra «Neumatico Trasero Demo» y viceversa. Si la búsqueda no encuentra nada, la lista dice «Ningún producto coincide» en lugar de «No hay productos en esta lista».
+  </ChangeItem>
+</ul>
+
+## Otros
+
+<ul class="changes">
+  <ChangeItem title="Exploración automática de la app">
+    Se recorrió la app en desktop y mobile con cada rol y se registraron hallazgos para revisar. No hay cambios visibles para el usuario.
+  </ChangeItem>
+
+  <ChangeItem title="Previews y pruebas automáticas con Next.js">
+    Las previews de los pull requests actualizan solo los pasos afectados por cada cambio, y la app del carrito en Next.js se puede levantar para probarla. No hay cambios visibles para el usuario.
+  </ChangeItem>
+</ul>
