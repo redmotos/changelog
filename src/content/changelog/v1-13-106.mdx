@@ -1,0 +1,57 @@
+---
+apps: [backoffice]
+version: "1.13.106"
+date: 2026-10-20T17:54:23Z
+title: Sugerir vendedores al asignar usuarios y ordenar la lista de Usuarios
+description: En «Vendedores a asignar» aparecen sugerencias de empleados de Odoo al escribir. La lista de Usuarios sale ordenada por Nombre y se puede ordenar por columna. También se corrigen el descuento en surtido y los productos sin existencia en los pedidos.
+---
+
+import ChangeItem from "../../components/ChangeItem.astro";
+import ReleaseGallery from "../../components/ReleaseGallery.astro";
+import vendedores1 from "./v1-13-106-01.png";
+import vendedores2 from "./v1-13-106-02.png";
+import vendedores3 from "./v1-13-106-03.png";
+import usuarios1 from "./v1-13-106-04.png";
+import usuarios2 from "./v1-13-106-05.png";
+import usuarios3 from "./v1-13-106-06.png";
+import descuento1 from "./v1-13-106-07.png";
+import descuento2 from "./v1-13-106-08.png";
+import descuento3 from "./v1-13-106-09.png";
+import sinExistencia1 from "./v1-13-106-10.png";
+import sinExistencia2 from "./v1-13-106-11.png";
+
+## Nuevo
+
+<ul class="changes">
+  <ChangeItem title="Sugerir vendedores al escribir en Vendedores a asignar">
+    Al escribir dos o más letras en «Vendedores a asignar» aparece una lista de empleados de Odoo que coinciden. Un clic agrega el nombre al usuario. También se puede escribir un nombre libre y agregarlo con Enter o coma, como antes. Aplica al crear y al editar usuarios.
+
+    <ReleaseGallery images={[vendedores1, vendedores2, vendedores3]} alt="Lista de vendedores que coinciden con lo escrito, al crear un usuario nuevo y al agregar uno con un clic" />
+
+  </ChangeItem>
+
+  <ChangeItem title="Ordenar la lista de Usuarios por Nombre y por columna">
+    La lista de Usuarios sale siempre de la A a la Z por Nombre, también al cambiar de página o aplicar filtros. Al tocar el título de Nombre, Apellido, Usuario o Correo electrónico se ordena por esa columna, y al tocarlo otra vez el orden se invierte. La flecha del título indica el orden activo.
+
+    <ReleaseGallery images={[usuarios1, usuarios2, usuarios3]} alt="Lista de Usuarios ordenada por Nombre de la A a la Z, de la Z a la A y por Apellido" />
+
+  </ChangeItem>
+</ul>
+
+## Correcciones
+
+<ul class="changes">
+  <ChangeItem title="Ocultar el porcentaje de descuento en surtido y reconteo">
+    En las pantallas de surtido y reconteo ya no aparece la etiqueta con el porcentaje de descuento junto al nombre de cada producto, porque bodega solo surte. La nota del pedido se mantiene igual, y el descuento sigue viéndose en el detalle y la confirmación del pedido.
+
+    <ReleaseGallery images={[descuento1, descuento2, descuento3]} alt="Pantallas de surtido y reconteo sin etiqueta de descuento, en teléfono y en computadora" />
+
+  </ChangeItem>
+
+  <ChangeItem title="Mostrar productos sin existencia al buscar en un pedido">
+    Al buscar en la pestaña Catálogo de un pedido, y al agregar productos al surtir o reconteo, aparecen también los que no tienen existencia en la sucursal del pedido, con inventario en 0. Así se puede escribir una cantidad y agregarlos.
+
+    <ReleaseGallery images={[sinExistencia1, sinExistencia2]} alt="Producto sin existencia en el catálogo del pedido con inventario 0, y en la ventana Agregar productos" />
+
+  </ChangeItem>
+</ul>
