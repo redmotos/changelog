@@ -1,0 +1,79 @@
+---
+apps: [backoffice, shoppingcart]
+version: "1.13.107"
+date: 2026-10-20T23:11:30Z
+title: Elegir la lista de precios de un pedido y varias correcciones
+description: Vendedores y administradores pueden cambiar la lista de precios de un pedido sin cambiar de cliente. También se corrigen catálogos, reconteo, búsqueda de imágenes y la finalización de compra.
+---
+
+import ChangeItem from "../../components/ChangeItem.astro";
+import ReleaseGallery from "../../components/ReleaseGallery.astro";
+import catalogoGuardado1 from "./v1-13-107-01.png";
+import fechasCatalogo1 from "./v1-13-107-02.png";
+import proveedores1 from "./v1-13-107-03.png";
+import verPedido1 from "./v1-13-107-04.png";
+import verPedido2 from "./v1-13-107-05.png";
+import reconteo1 from "./v1-13-107-06.png";
+
+## Nuevo
+
+<ul class="changes">
+  <ChangeItem title="Elegir la lista de precios de un pedido">
+    Vendedores y administradores pueden cambiar la lista de precios de un pedido, de cualquier cliente, sin cambiar de cliente. Está disponible en los pedidos creados o en borrador, desde la pantalla de confirmación. Al cambiar la lista se recalculan los precios y se quita el descuento de las líneas. El cambio queda registrado para auditoría. Si después se cambia el cliente, la lista vuelve a la del nuevo cliente.
+  </ChangeItem>
+</ul>
+
+## Correcciones
+
+<ul class="changes">
+  <ChangeItem title="Actualizar el catálogo al guardar su configuración">
+    Al guardar «Configuración del catálogo», el contador de productos, el resumen de filtros y el formulario muestran los datos recién guardados, sin necesidad de recargar la página.
+
+    <ReleaseGallery images={[catalogoGuardado1]} alt="Con la corrección, el contador pasa de 60 a 65 al guardar y el resumen ya no muestra la exclusión quitada" />
+
+  </ChangeItem>
+
+  <ChangeItem title="Mostrar las fechas guardadas al editar un catálogo">
+    Al editar un catálogo con fechas de vigencia, los campos «Fecha desde» y «Fecha hasta» muestran las fechas guardadas en lugar de quedar vacíos.
+
+    <ReleaseGallery images={[fechasCatalogo1]} alt="El formulario de configuración del catálogo abre con las fechas guardadas" />
+
+  </ChangeItem>
+
+  <ChangeItem title="Avisar cuando no se pueden cargar los productos del catálogo">
+    Si falla la carga de los productos al editar un catálogo, aparece un aviso con el botón «Reintentar». Antes se mostraba «0 productos» como si el catálogo estuviera vacío.
+  </ChangeItem>
+
+  <ChangeItem title="Limitar el alto de la lista de proveedores">
+    Con muchos proveedores, la lista de «Excluir proveedores» e «Incluir proveedores» tiene su propio desplazamiento. Si no hay espacio debajo del campo, la lista se abre hacia arriba.
+
+    <ReleaseGallery images={[proveedores1]} alt="La lista de proveedores se abre hacia arriba, con alto limitado y desplazamiento" />
+
+  </ChangeItem>
+
+  <ChangeItem title="Encontrar productos en Imágenes aunque la búsqueda lleve tildes">
+    Al buscar «batería» o «bujía» con tilde se encuentran los productos, tengan o no tilde en el nombre. Si no hay coincidencias, el mensaje indica lo que se buscó.
+  </ChangeItem>
+
+  <ChangeItem title="Mostrar «Ver» en los pedidos creados">
+    El botón de los pedidos y cotizaciones creados dice «Ver», porque solo abre el pedido. La confirmación sigue en el botón «Confirmar pedido», dentro de esa pantalla.
+
+    <ReleaseGallery images={[verPedido1, verPedido2]} alt="Botón «Ver» en la fila de un pedido creado, y la pantalla que se abre con «Confirmar pedido»" />
+
+  </ChangeItem>
+
+  <ChangeItem title="Identificar el usuario de carrito en el encabezado del cliente">
+    El encabezado del cliente muestra el usuario de carrito con la etiqueta «Usuario:», para distinguirlo del teléfono cuando ambos son el mismo número.
+  </ChangeItem>
+
+  <ChangeItem title="Avisar al recontar más cascos de los que pidió el cliente">
+    El aviso de reconteo muestra lo pedido, lo surtido y lo recontado. Si lo recontado supera lo pedido, aparece un aviso en rojo con la cantidad que se agregará. Se quitó el texto que decía que se cambiaría la cantidad surtida.
+
+    <ReleaseGallery images={[reconteo1]} alt="Aviso de reconteo en rojo cuando lo recontado supera lo pedido, en teléfono" />
+
+  </ChangeItem>
+
+  <ChangeItem title="Permitir finalizar la compra sin correo ni dirección de entrega">
+    Al finalizar la compra, el correo y la dirección de entrega ya no son obligatorios. Si no se completa la dirección, aparece un aviso de que un asesor se pondrá en contacto para coordinar la entrega.
+  </ChangeItem>
+</ul>
