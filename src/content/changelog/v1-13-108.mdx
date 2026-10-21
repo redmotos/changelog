@@ -1,0 +1,25 @@
+---
+apps: [backoffice, shoppingcart]
+version: "1.13.108"
+date: 2026-10-21T03:38:30Z
+title: Generar la cotización en PDF de los pedidos en borrador
+description: Los pedidos en borrador tienen un botón para ver una cotización lista para imprimir o guardar como PDF, con el formato de la factura de Odoo y sin datos fiscales.
+---
+
+import ChangeItem from "../../components/ChangeItem.astro";
+
+## Nuevo
+
+<ul class="changes">
+  <ChangeItem title="Ver la cotización en PDF desde Confirmar pedido">
+    En los pedidos en borrador aparece el botón «Ver cotización (PDF)». Abre la cotización en una pestaña nueva, con el encabezado de la empresa, los datos del cliente y del vendedor, la vigencia, las líneas con descuento, los totales, el total en letras y el espacio para «Recibe conforme». Se imprime o se guarda como PDF desde el navegador. Las cotizaciones largas salen en varias hojas, con el encabezado de columnas repetido. El botón no aparece en pedidos que ya no están en borrador y se deshabilita si el pedido no tiene productos.
+  </ChangeItem>
+
+  <ChangeItem title="Incluir la última cantidad editada en la cotización">
+    Si se cambia una cantidad y se hace clic en el botón de inmediato, la cotización ya muestra la cantidad nueva.
+  </ChangeItem>
+
+  <ChangeItem title="Mostrar los mismos totales en Confirmar pedido y en la cotización">
+    El ISV se calcula con la misma regla en ambas pantallas, así que los totales coinciden.
+  </ChangeItem>
+</ul>
